@@ -119,9 +119,9 @@ nodejs个人博客项目
 
 
     2）创建项目
-        2.1）在F盘blog文件
+        2.1）在某盘建立项目文件
 
-        2.2）用命令行打开文件（cmd 或powershell 推荐powershell）
+        2.2）用命令行打开文件（cmd 或powershell）
 
         2.3）使用npm init初始化项目
             在nodejs-express-mysql目录下新建一个package.json，存储项目的基本信息
