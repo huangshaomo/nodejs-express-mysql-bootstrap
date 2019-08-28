@@ -1,0 +1,46 @@
+<header class="header">
+    <nav class="navbar navbar-default" id="navbar">
+        <div class="container">
+            <div class="header-topbar hidden-xs link-border">
+                 <ul class="site-nav topmenu">
+                <!-- <li><a href="tags.html">标签云</a></li> -->
+                <li class="dropdown <%- loginUser ? '' : 'hide' %>"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" rel="nofollow" id="dropdown-toggle">
+                    <img src="<%- loginUser ? userAvatar : '' %>" ></a>
+                    <ul class="dropdown-menu header-topbar-dropdown-menu">
+                      <li><a data-toggle="modal" data-target="#WeChat" rel="nofollow"> 个人中心</a></li>
+                      <li><a data-toggle="modal" data-target="#forgetModal">修改密码</a></li>
+                      <li><a href="/logout"> 退出登录</a></li>
+                      <!-- <li><a data-toggle="modal" data-target="#areDeveloping" rel="nofollow" href="/logout"> 退出登录</a></li> -->
+                    </ul>
+                  </li>
+              </ul>
+<!-- 
+                <a href="javascript:;" class="login" rel="nofollow" id="isLogining">Hi,请登录</a>&nbsp;&nbsp;
+                <a href="javascript:;" class="register" rel="nofollow" id="loginHref">我要注册</a>&nbsp;&nbsp;
+                <a href="" rel="nofollow">找回密码</a> </div> -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#header-navbar" aria-expanded="false"> <span class="sr-only"></span> <span
+                            class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                    </button>
+                    <h1 class="logo hvr-bounce-in"><a href="" title=""><img src="<%= webConfig.logo%>" alt=""></a></h1>
+                </div>
+                <div class="collapse navbar-collapse" id="header-navbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="hidden-index active"><a data-cont="黄绍模首页" href="/">首页</a></li>
+                        <% typeData.forEach(item=>{%>
+                        <li class="hidden-index "><a href="/list?id=<%= item.id%>"><%= item.name%></a></li>
+                        <% }) %>
+                    </ul>
+                    <form class="navbar-form visible-xs" action="/Search" method="post">
+                        <div class="input-group">
+                            <input type="text" name="keyword" class="form-control" placeholder="请输入关键字" maxlength="20"
+                                autocomplete="off">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-search" name="search" type="submit">搜索</button>
+                            </span> </div>
+                    </form>
+                </div>
+            </div>
+    </nav>
+</header>

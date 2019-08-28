@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>说说 - {$Think.config.NAME}</title>
+	<meta name="keywords" content="{$system.keyword}" />
+	<meta name="description" content="{$system.remark}" />
+	<meta name="version" content="{$Think.config.NAME} v{$version}" />
+	<meta name="author" content="{$system.author}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<include file="Public:nav"/>
+	<div class="row aerousel">
+		<ol class="breadcrumb">
+			<li><a href="index.html">网站首页</a></li>
+			<li class="active">闲言碎语</li>
+		</ol>
+		<div class="col-md-8 row-l">
+			<volist name="say" id="v">
+				<div class="media feel">
+					<div class="f-time"><a><span class="glyphicon glyphicon-dashboard"></span></a>&nbsp;&nbsp;{$v.s_time|getTime} 在 <a class="from">{$v.s_from}</a> 说到：</div>
+					<div class="media-left media-middle">
+					    <img class="media-object img-50" src="{$system.admin_img}" alt="...">
+					</div>
+					<div class="media-body feel-body"><a href="{:U('/feel-'.$v['s_id'])}">{$v.s_content}</a></div>
+				</div>
+			</volist>
+			{$page}
+		</div>
+	<include file="Public:sider"/>
+	<include file="Public:foot"/>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<div class="col-md-4 row-r">
+	<div class="sider-box sider-box2">
+	    <div class="search-box">
+	        <div class="input-group search-input">
+	        <form action="{:U('Class/search')}" method="get" class="form-search">
+	          	<input type="text" class="form-control" placeholder="请输入关键词" name="key">
+	          	<span class="input-group-btn">
+	            	<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+	          	</span>
+	        </form>
+	        </div>
+	    </div>
+		
+    </div>
+	<div class="sider-box2">    
+	<h4><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;我的标签</h4>
+	    <ul class="tag-ul">
+	      	<volist name="tag" id="v" empty="暂时没有标签">
+	      	<if condition="$v['key'] % 6 ==1"><li class="label label-default"><a href="{:U('/article-'.$v['a_id'])}">{$v.a_keyword|getTag}</a></li></if>
+	      	<if condition="$v['key'] % 6 ==2"><li class="label label-primary "><a href="{:U('/article-'.$v['a_id'])}">{$v.a_keyword|getTag}</a></li></if>
+	      	<if condition="$v['key'] % 6 ==3"><li class="label label-success "><a href="{:U('/article-'.$v['a_id'])}">{$v.a_keyword|getTag}</a></li></if>
+	        <if condition="$v['key'] % 6 ==4"><li class="label label-info "><a href="{:U('/article-'.$v['a_id'])}">{$v.a_keyword|getTag}</a></li></if>
+	        <if condition="$v['key'] % 6 ==5"><li class="label label-warning "><a href="{:U('/article-'.$v['a_id'])}">{$v.a_keyword|getTag}</a></li></if>
+	        <if condition="$v['key'] % 6 ==0"><li class="label label-danger  tag-end "><a href="{:U('/article-'.$v['a_id'])}">{$v.a_keyword|getTag}</a></li></if>
+	      	</volist>
+	    </ul>
+	</div>
+	<div class="sider-box2">
+	<h4><span class="glyphicon glyphicon-retweet"></span>&nbsp;&nbsp;随机文章</h4>   	
+	    <ul class="rand-ul">
+	      	<volist name="s_article" id="vo">
+	        <notempty name="vo.a_id">
+	         	<li>
+	           		<a href="{:U('/article-'.$vo['a_id'])}" title="{$vo.a_title}" class="rand-img image-light"><img src="{$vo.a_img}" class="article-img" alt="{$vo.a_title}" title="{$vo.a_title}" /></a>
+	           		<div class="rand-title"><a href="{:U('/article-'.$vo['a_id'])}">{$vo.a_title|msubstr=0,15,'utf-8',true}</a></div>
+	           		<div class="rand-remark">{$vo.a_remark|strip_tags|msubstr=0,35,'utf-8',true}</div>
+	              </li>
+	          </notempty>
+	      </volist>
+	    </ul>
+	</div>
+
+	<div class="sider-box2">
+  	<h4 class="link"><span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp;友情链接</h4>
+	  	<ul class="link-ul">
+	    	<volist name="link" id="v" empty="暂时没有友情链接">
+	    	<li><a href="{$v.l_url}" target="_blank" title="{$v.l_name}">{$v.l_name}</a></li>
+	    	</volist>
+	  	</ul>
+	</div>
+</div>
+</div>
+</div>

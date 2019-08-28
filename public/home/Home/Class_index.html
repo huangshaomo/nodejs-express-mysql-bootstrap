@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>分类 - {$Think.config.NAME}</title>
+    <meta name="keywords" content="{$keyword}" />
+	<meta name="keywords" content="{$system.keyword}" />
+	<meta name="description" content="{$system.remark}" />
+	<meta name="version" content="{$Think.config.NAME} v{$version}" />
+	<meta name="author" content="{$system.author}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <include file="Public:nav"/>
+      	<div class="row aerousel">
+      		<ol class="breadcrumb">
+		  	<li><a href="index.html">网站首页</a></li>
+		  	<li class="active">分类</li>
+			</ol>
+			<div class="col-md-8 row-l">
+
+			<volist name="article" id="v" empty="暂时没有文章">	
+			<article>
+				<h5>
+					<eq name="v.a_original" value="1">
+						<span class="original">【原创】</span>
+					<else />
+						<span class="reprint">【转载】</span>
+					</eq>
+					<a href="{:U('/article-'.$v['a_id'])}">{$v.a_title}</a>
+					<eq name="v.a_view" value="2">
+						<img  class="title_r hidden-xs" src="__IMG__/icon/tuijian.gif"/>
+					</eq>
+				</h5>
+				<div class="post-summary">
+					<div class="clearfix" >           
+						<p class="article-remark"> 
+							<a class="article-img-a image-light" href="{:U('/article-'.$v['a_id'])}"><img src="{$v.a_img}" class="article-img" alt="{$v.a_title}" title="{$v.a_title}" /></a>
+							{$v.a_remark}
+							<a href="{:U('/article-'.$v['a_id'])}" class="article-look">继续阅读→</a>
+						</p>
+						<footer class="article-footer">
+							<div class="article-footer-l">
+								<span class="glyphicon glyphicon-tags blog-icon"></span>{$v.a_keyword|getKeyword}
+							</div>
+							<div class="article-footer-r">
+								<span class="glyphicon glyphicon-fire blog-icon"></span>
+								<a>1045</a>&nbsp;
+								<span class="glyphicon glyphicon-comment blog-icon"></span>
+								<a>1</a>
+							</div>
+							<!--<a><span class="glyphicon glyphicon-time"></span></a>&nbsp;{$v.a_time|getTime}&nbsp;&nbsp;作者：{$v.a_author}&nbsp;&nbsp;分类：[&nbsp;{$v.t_name}&nbsp;]<span class="hidden-xs">&nbsp;&nbsp;访问：&nbsp;{$v.a_hit}&nbsp;</span>-->
+						</footer>
+					</div>
+				</div>
+		</article>
+		</volist>
+		{$page}
+		</div>	
+    <include file="Public:sider"/>
+    <include file="Public:foot"/>
+</body>
+</html>

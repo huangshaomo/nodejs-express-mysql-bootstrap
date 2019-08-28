@@ -1,0 +1,21 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "这是利用nodejs+express+mysql搭建的一个个人博客项目",
+  "main": " ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "黄绍模",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.4",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "moment": "^2.24.0",
+    "multer": "^1.4.2",
+    "mysql": "^2.17.1",
+    "ueditor": "^1.2.3"
+  }
+}

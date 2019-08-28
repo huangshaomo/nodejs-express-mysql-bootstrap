@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="/public/admin/css/pintuer.css">
+<link rel="stylesheet" href="/public/admin/css/admin.css">
+<script src="/public/admin/js/jquery.js"></script>
+<script src="/public/admin/js/pintuer.js"></script>
+</head>
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head"><strong><span class="icon-key"></span> 修改分类</strong></div>
+  <div class="body-content">
+    
+    <form method="post" class="form-x" action="">
+      <div class="form-group">
+        <div class="label">
+          <label for="sitename">分类名称：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input " id="mpass" value = "<%=data.name%>" name="name" size="50" placeholder="请输入分类名称" data-validate="required:请输入分类名称" />       
+          <input type="hidden"  value = "<%=data.id%>" name="id">
+        </div>
+      </div>   
+
+      <div class="form-group">
+        <div class="label">
+          <label for="sitename">分类关键字：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input " name="keywords"  value = "<%=data.keywords%>"  size="50" placeholder="请输入分类关键字" data-validate="required:请输入分类关键字" />         
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="label">
+          <label for="sitename">分类描述：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input " name="description" value="<%= data.description%>"  size="50" placeholder="请输入分类描述" data-validate="required:请输入分类描述" />          
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="label">
+          <label for="sitename">分类排序：</label>
+        </div>
+        <div class="field">
+            <input type="number" class="input " name="sort" value="<%= data.sort%>"  size="50" placeholder="请输入分类的排序，数值越大越靠前" data-validate="required:请输入分类的排序，数值越大越靠前" />          
+          </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="label">
+          <label></label>
+        </div>
+        <div class="field">
+          <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>   
+        </div>
+      </div>      
+    </form>
+  </div>
+</div>
+</body>
+</html>

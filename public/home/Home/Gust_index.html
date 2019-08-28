@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>留言板 - {$Think.config.NAME}</title>
+	<meta name="keywords" content="{$system.keyword}" />
+	<meta name="description" content="{$system.remark}" />
+	<meta name="version" content="{$Think.config.NAME} v{$version}" />
+	<meta name="author" content="{$system.author}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<include file="Public:nav"/>
+	<div class="row aerousel">
+	<ol class="breadcrumb">
+		  <li><a href="index.html">网站首页</a></li>
+		  <li class="active">雁过留名&nbsp;|&nbsp;留言板</li>
+	</ol>
+	<div class="col-md-8 row-l gust">
+		<div class="alert alert-success alert-dismissible hidden-xs" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  <a><span class=" glyphicon glyphicon-heart"></span></a>&nbsp;&nbsp;<strong>温馨提示</strong>:需要申请本博客友情连接，请在邻居页填写相关数据，谢谢!
+		</div>
+		<h4>请文明留言</h4><hr />
+		<volist name="contents" id="v">
+		<div class="media connect">
+			<div class="media-left">
+			<notempty name="v.g_url">
+				<a href="{$v.g_url}" target="_blank" rel="nofollow" title="浏览 {$v.g_name}的网站?"><img class="media-object img-circle  img-50" src="{$v.g_img}" alt="{$v.g_name}"></a>
+			<else/>
+				<img class="media-object img-circle img-50" src="{$v.g_img}" alt="{$v.g_name}">
+			</notempty>				
+			</div>
+			<div class="media-body">
+			<div class="fool hidden-xs">#{$v.g_id}</div>
+				<p class="media-heading"><a><span class="glyphicon glyphicon-user"></span></a>&nbsp;&nbsp;&nbsp;{$v.g_name}&nbsp;&nbsp;&nbsp;<a><span class="glyphicon glyphicon-time"></span></a>&nbsp;{$v.g_time|getTime}&nbsp;&nbsp;&nbsp;&nbsp;<a class="from">{$v.g_from}</a>&nbsp;&nbsp;&nbsp;&nbsp;<a><span class="glyphicon glyphicon-map-marker"></span></a>&nbsp;&nbsp;{$v.ip}</p>
+				<div class="connect-box"> {$v.g_content|reFace}</div><hr>
+				<notempty name="v.g_rtime">
+				<div class="media">
+					<div class="media-left">
+					<a><img class="media-object img-circle img-50" src="{$system.admin_img}" alt="{$vo.g_rname}"></a>
+					</div>
+					<div class="media-body">
+					<p class="media-heading"><a><span class="glyphicon glyphicon-king"></span></a>&nbsp;&nbsp;&nbsp;{$v.g_rname}&nbsp;&nbsp;&nbsp;<a><span class="glyphicon glyphicon-send"></span></a>&nbsp;{$v.g_rtime|date="m-d H:i",###}&nbsp;&nbsp;&nbsp;&nbsp;回复&nbsp;<a>@{$v.g_name}</a>&nbsp;中说到：</p>
+					<div class="connect-box">{$v.g_rcontent|reFace}</div>
+					</div>
+				</div>
+				</notempty>
+			</div>
+		</div>
+		<hr />
+		</volist>
+		{$page}
+		<hr />
+		<div class="home-from">
+			<div class="home-from-model"  data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+			我要评论
+			</div>
+			<div class="collapse" id="collapseExample">
+			<div class="well">
+            <div method="post" >
+			<input id="jump" type="hidden"  value="__SELF__" />
+			<include file="Public:form"/>					
+			<div class="form-group home-from-box">
+			    <button class="btn btn-default btn-add-gust" >提交</button>
+			</div>
+            </div>
+		</div>
+		</div>
+		</div>		
+	</div>
+	<include file="Public:sider"/>
+	<include file="Public:foot"/>
+	</body>
+</html>

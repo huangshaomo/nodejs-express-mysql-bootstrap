@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="renderer" content="webkit">
+	<title></title>
+	<link rel="stylesheet" href="/public/admin/css/pintuer.css">
+	<link rel="stylesheet" href="/public/admin/css/admin.css">
+	<script src="/public/admin/js/jquery.js"></script>
+	<script src="/public/admin/js/pintuer.js"></script>
+</head>
+
+<body>
+	<div class="panel admin-panel">
+		<div class="panel-head"><strong class="icon-reorder"> 管理员列表</strong> <a href=""
+				style="float:right; display:none;">添加字段</a></div>
+		<div class="padding border-bottom">
+			<ul class="search" style="padding-left:10px;">
+				<li> <a class="button border-main icon-plus-square-o" href="/admin/user/add" aria-disabled="true"> 添加会员</a> </li>
+				<li>
+					<form action="" method="get">
+						<input type="text" value="<%=search%>" placeholder="请输入搜索关键字" name="search" class="input"
+							style="width:250px; line-height:17px;display:inline-block" />
+						<button class="button border-main icon-search">搜索</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+		<table class="table table-hover text-center">
+			<tr>
+				<th width="100" style="text-align:left; padding-left:20px;">ID</th>
+				<th>用户名</th>
+				<th>注册时间</th>
+				<th>状态</th>
+			</tr>
+			<!-- ejs的模板引擎 -->
+			<% data.forEach(item=>{%>
+			<tr>
+				<td><%= item.id%></td>
+				<td><%= item.username%></td>
+				<td><%= item.time%></td>
+				<td>
+					<%if(item.status ==0){%>
+					<a class="button border-green" href="javascript:;">白名单</a>
+					<%}else{%>
+					<a class="button border-red" href="javascript:;">黑名单</a>
+					<%}%>
+	</td>
+	<% }) %>
+
+
+
+	<tr>
+		<td colspan="8">
+			<div class="pagelist"> 
+				<%- show%>
+			</div>
+		</td>
+	</tr>
+	</table>
+	</div>
+	</form>
+	<script>
+		// 无刷新修改状态
+		function changeStatus(obj, id, status) {
+			// console.log(arguments[0]);
+			// 发送ajax请求
+			$.get("/admin/admin/ajax_status", { id: id, status: status }, function (data) {
+				//根据返回数据判断是否执行成功
+				if (data == 1) {
+					//判断点击的按钮的当前状态，如果点击的按钮当前状态是白色
+					if (status == 1) {
+						$(obj).parent().html(`<a class="button border-red" href="javascript:;" onclick="changeStatus(this,${id},0)">黑名单</a>`);
+					} else {
+						$(obj).parent().html(`<a class="button border-green" href="javascript:;" onclick="changeStatus(this,${id},1)">白名单</a>`);
+					}
+				}
+			})
+
+		}
+
+		// 无刷新删除数据
+		function del(obj, id) {
+			// 确认框
+			if (confirm("您确认删除吗？")) {
+				// 发送ajax请求删除
+				$.get("/admin/admin/ajax_del", { id: id }, function (data) {
+					// 判断是否删除成功
+					if (data == 1) {
+						// 移除显示的数据
+						$(obj).parents("tr").remove();
+					} else {
+						alert("删除失败");
+					}
+				})
+			}
+		}
+	</script>
+</body>
+
+</html>

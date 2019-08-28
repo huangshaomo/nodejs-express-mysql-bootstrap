@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>{$albums.al_name} - {$Think.config.NAME}</title>
+	<meta name="keywords" content="{$system.keyword}" />
+	<meta name="description" content="{$system.remark}" />
+	<meta name="version" content="{$Think.config.NAME} v{$version}" />
+	<meta name="author" content="{$system.author}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<include file="Public:nav"/>
+	<div class="row aerousel">
+	<ol class="breadcrumb">
+		  <li><a href="index.html">网站首页</a></li>
+		  <li><a href="album.html">相册</a></li>
+		  <li class="active">{$albums.al_name}</li>
+	</ol>
+	<div class="col-md-8 row-l">
+		<div class="row album-look">
+		<volist name="pictureList" id="v" >
+		  <div class="col-xs-6 col-md-3">
+		  <a class="fancybox-buttons thumbnail preview" data-fancybox-group="button" href="{$v.p_img}"><img src="{$v.p_thumb}" alt="{$v.p_remark}" /></a>
+		  </div>
+		</volist>
+		</div>
+		<div class="sider-box">
+    <volist name="al_content" id="vo">
+    <div class="media connect">
+    <div class="media-left">
+        <notempty name="vo.ac_url">
+        <a href="{$vo.alc_url}" target="_blank" rel="nofollow" title="浏览 {$vo.alc_name} 的网站?"><img class="media-object img-circle  img-50" src="{$vo.alc_img}" alt="{$vo.alc_name}"></a>
+        <else />
+        <img src="{$vo.alc_img}" class="media-object img-circle img-50" alt="{$vo.alc_name}"/>
+        </notempty>
+        </div>
+        <div class="media-body">
+        	<div class="fool">#{$vo.alc_id}</div>
+            <p class="media-heading"><a><span class="glyphicon glyphicon-user"></span></a>&nbsp;&nbsp;&nbsp;{$vo.alc_name}&nbsp;&nbsp;<a><span class="glyphicon glyphicon-time"></span></a>&nbsp;{$vo.alc_time|getTime}&nbsp;&nbsp;&nbsp;&nbsp;<a class="from">{$vo.alc_from}</a>&nbsp;&nbsp;&nbsp;&nbsp;<a><span class="glyphicon glyphicon-map-marker"></span></a>&nbsp;&nbsp;{$vo.ip}</p>
+            <div class="connect-box"> {$vo.alc_content|reFace}</div>
+            <notempty name="vo.alc_rtime">
+           	<hr class="content-hr" />
+            <div class="media">
+                <div class="media-left">
+                <a><img class="media-object img-circle img-50" src="{$system.admin_img}" alt="{$vo.alc_rname}"></a>
+                </div>
+                <div class="media-body">
+                <p class="media-heading"><a><span class="glyphicon glyphicon-king"></span></a>&nbsp;&nbsp;&nbsp;{$vo.alc_rname}&nbsp;&nbsp;<a><span class="glyphicon glyphicon-send"></span></a>&nbsp;{$vo.alc_rtime|date="m-d H:i",###}&nbsp;&nbsp;&nbsp;&nbsp;回复&nbsp;<a>@{$vo.alc_name}</a>&nbsp;中说到：</p>
+                <div class="connect-box">{$vo.alc_rcontent|reFace}</div>
+                </div>
+            </div>	
+            </notempty>
+        </div>
+    </div>
+    <hr />
+    </volist>
+    
+    <div class="home-from">
+        <div class="home-from-model"  data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">留下脚印</div>
+        <div class="collapse" id="collapseExample">
+            <div class="well">
+            <div method="post" >
+			<input id="alid" type="hidden" value="{$albums.al_id}" />
+			<input id="alname" type="hidden"  value="{$albums.al_name}" />
+			<input id="jump" type="hidden"  value="__SELF__" />
+			<include file="Public:form"/>					
+			<div class="form-group home-from-box">
+			    <button class="btn btn-default btn-add-album" >提交</button>
+			</div>
+            </div>
+            </div>
+       	</div>
+    </div>
+    </div>
+	</div>
+	<include file="Public:sider"/>
+	<include file="Public:foot"/>
+</body>
+</html>

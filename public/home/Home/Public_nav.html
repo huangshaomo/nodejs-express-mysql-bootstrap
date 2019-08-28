@@ -1,0 +1,41 @@
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--[if lt IE 9]>
+<script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->        
+<meta property="qc:admins" content="73113635665455576375" />
+<link rel="stylesheet" href="__CSS__/bootstrap.min.css" />
+<link rel="shortcut icon" href="__IMG__/icon/favicon.ico" />
+<link rel="stylesheet" href="__CSS__/my.css" />
+    </head>
+    <body>  
+        <div class="container ">
+            <div class="row header">
+                <div class="col-md-4 logo">
+                    <a title="{$Think.config.NAME}" href="/"><img src="__IMG__/icon/logo.png" /></a>
+                    <h5 class="hidden-xs">{$system.title2}</h5>               
+                </div>
+                <div class="nav-dh col-md-5 col-xs-12">
+                    <nav class="navbar navbar-default">
+                        	<div class="navbar-header">
+	                          	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	                            <span class="sr-only">导航</span>
+	                            <span class="icon-bar"></span>
+	                            <span class="icon-bar"></span>
+	                            <span class="icon-bar"></span>
+	                          	</button>
+	                           	<a class="navbar-brand visible-xs" href="#">博客导航</a>
+	                        </div>
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                           	<ul class="nav navbar-nav">
+	                            <li class="{$index} dh"><a href="{:U('/index')}">首页</a></li>
+	                          
+
+	                            <volist name="pid" id="vo">
+	                                <li class="dh"><a href="{:U('/class-'.$vo['t_id'])}" ><i class="icon-ok-sign"></i> {$vo.t_name}</a></li>
+	                            </volist>  
+                          	</ul>
+                        </div>
+                    </nav>
+                </div>    
+            </div>

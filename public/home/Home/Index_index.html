@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<title>首页 - {$Think.config.NAME}</title>
+	<meta name="keywords" content="{$system.keyword}" />
+	<meta name="description" content="{$system.remark}" />
+	<meta name="version" content="{$Think.config.NAME} v{$version}" />
+	<meta name="author" content="{$system.author}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<include file="Public:nav"/>
+		<div class="container hidden-xs ppt">
+                <div id="ppt-main" class="nivoSlider">
+                <notempty name="ppt.0.pp_url">
+                    <a href="{$ppt.0.pp_url}" target="_blank"><img src="{$ppt.0.pp_img}" alt=""  title="{$ppt.0.pp_note} " /></a>
+                    <else />
+                    <img src="{$ppt.0.pp_img}"  title="{$ppt.0.pp_note} "/>
+                </notempty>
+                <notempty name="ppt.1.pp_url">
+                    <a href="{$ppt.1.pp_url}" target="_blank"><img src="{$ppt.1.pp_img}" alt=""  title="{$ppt.1.pp_note} " /></a>
+                    <else />
+                    <img src="{$ppt.1.pp_img}"  title="{$ppt.1.pp_note} "/>
+                </notempty>
+                <notempty name="ppt.2.pp_url">
+                    <a href="{$ppt.2.pp_url}" target="_blank"><img src="{$ppt.2.pp_img}" alt=""  title="{$ppt.2.pp_note} " /></a>
+                    <else />
+                    <img src="{$ppt.2.pp_img}"  title="{$ppt.2.pp_note} "/>
+                </notempty>
+                </div>
+		</div>
+		<div class="row aerousel">
+			<div class="col-md-8 row-l index">
+			<volist name="articles" id="v" empty="暂时没有文章">	
+			<article>
+				<h5>
+					<eq name="v.a_original" value="1">
+						<span class="original">【原创】</span>
+					<else />
+						<span class="reprint">【转载】</span>
+					</eq>
+					<a href="{:U('/article-'.$v['a_id'])}">{$v.a_title}</a>
+					<eq name="v.a_view" value="2">
+						<img  class="title_r hidden-xs" src="__IMG__/icon/tuijian.gif"/>
+					</eq>
+				</h5>
+				<div class="clearfix" >           
+					<p class="article-remark"> 
+						<a class="article-img-a image-light hidden-xs" href="{:U('/article-'.$v['a_id'])}"><img src="{$v.a_img}" class="article-img" alt="{$v.a_title}" title="{$v.a_title}" /></a>
+						{$v.a_remark}
+						<a href="{:U('/article-'.$v['a_id'])}" class="article-look">查看更多</a>
+					</p>
+				<!-- 	<footer class="article-footer"> 
+						<div class="article-footer-l">
+							<span class="glyphicon glyphicon-tags blog-icon"></span>{$v.a_keyword|getKeyword}
+						</div>
+						<div class="article-footer-r">
+							<span class="glyphicon glyphicon-fire blog-icon"></span>
+							<a>{$v.a_hit}</a>&nbsp;
+							<span class="glyphicon glyphicon-comment blog-icon"></span>
+							<a>{$v.a_num}</a>
+						</div>
+					</footer> -->
+				</div>
+		</article>
+		</volist>
+		</div>	
+	<include file="Public:sider"/>
+	<include file="Public:foot"/>
+	<script src="__JS__/jquery.nivo.slider.pack.js"></script>
+	 <script type="text/javascript">
+            $(function() {
+                $('#ppt-main').nivoSlider({
+	                //effect: 'random', // 过渡效果  
+				    slices: 15, //effect为切片效果时的数量  
+				    boxCols: 8, //effect为格子效果时的列  
+				    boxRows: 4, //effect为格子效果时的行  
+				    animSpeed: 500, //动画速度  
+				    pauseTime: 3000, //图片切换速度  
+				    startSlide: 0, //从第几张开始  
+				    directionNav: false, //是否显示图片切换按钮(上/下页)  
+				    directionNavHide: true, //是否鼠标经过才显示  
+				    controlNav: false, // 显示序列导航  
+				    controlNavThumbs: false, // 显示图片导航  
+				    //keyboardNav: true, // 键盘控制（左右箭头）PS:建议把代码中的keypress换成keydown,因为在Chrome下
+                });
+            });
+        </script>
+</body>
+</html>

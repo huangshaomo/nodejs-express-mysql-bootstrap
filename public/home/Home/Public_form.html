@@ -1,0 +1,40 @@
+<div class="input-group home-from-box">
+    <span class="input-group-addon" id="basic-addon1">昵称</span>
+    <input type="text" class="form-control" placeholder="昵称" aria-describedby="basic-addon1" name="name" <notempty name="Think.session.nickname">value="{$Think.session.nickname}"<else / >value="{$Think.cookie.name}"</notempty> id="name">
+	<span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true"></span>
+</div>
+<div class="input-group home-from-box">
+    <span class="input-group-addon" id="basic-addon1">邮箱</span>
+    <input type="email" class="form-control" placeholder="邮箱" aria-describedby="basic-addon1" name="email" id="email" value="{$Think.cookie.email}">
+	<span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true"></span>
+</div>
+<div class="input-group home-from-box">
+    <span class="input-group-addon" id="basic-addon1">域名</span>
+    <input type="url" class="form-control" placeholder="(选填)带http://" aria-describedby="basic-addon1" id="url" value="{$Think.cookie.url}">
+</div>
+<div class="form-group home-from-box">
+    <a href="javascript:void(0);" id="rl_exp_btn"><span class="emotion hidden-xs"></span></a>
+	<div class="rl_exp" id="rl_bq" style="display:none;">
+		<ul class="rl_exp_tab clearfix">
+			<li><a href="javascript:void(0);" class="selected">默认</a></li>
+			<li><a href="javascript:void(0);">拜年</a></li>
+			<li><a href="javascript:void(0);">暴走漫画</a></li>
+		</ul>
+		<ul class="rl_exp_main clearfix rl_selected"></ul>
+		<ul class="rl_exp_main clearfix" style="display:none;"></ul>
+		<ul class="rl_exp_main clearfix" style="display:none;"></ul>
+		<a href="javascript:void(0);" class="close">×</a>
+	</div>
+    &nbsp;<input name="rember" type="checkbox" />  <samll>记住</samll>  <input type="checkbox" name="send" />  <small>通知博主</small>
+</div>
+<div class="form-group home-from-box">
+    <textarea class="form-control" id="content-text" name="content" rows="3" placeholder="请输入评论内容" rows="7"></textarea>
+</div>
+<div class="input-group home-from-box ">
+    <span class="input-group-addon" id="basic-addon1">验证码</span>
+    <div class="input-group check-text">
+    <input type="text" class="form-control" name="txt_check" id="txt_check" placeholder="验证码">
+    <span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true"></span>
+    </div>
+    <img style="cursor:pointer" class="img"  src="{:U('Home/Common/verify')}" onClick="this.src=this.src+'?'+Math.random();" title="看不清楚?点击刷新验证码?">    
+</div>

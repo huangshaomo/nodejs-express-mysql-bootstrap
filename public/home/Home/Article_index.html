@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>{$info.a_title} - {$Think.config.NAME}</title>
+    <meta name="keywords" content="{$info.a_keyword}" />
+    <meta name="description" content="{$info.a_remark}" />
+	<meta name="version" content="{$Think.config.NAME} v{$version}" />
+	<meta name="author" content="{$system.author}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="__CSS__/shCore.min.css" />
+	<script src="__JS__/shCore.min.js" ></script>
+	<script type="text/javascript">
+		SyntaxHighlighter.config.clipboardSwf = '__IMG__/clipboard.swf';
+		SyntaxHighlighter.all();
+	</script>
+    <include file="Public:nav"/>
+    <div class="row aerousel">
+        <ol class="breadcrumb">
+            <li><a href="index.html">网站首页</a></li>
+            <li class="active">学海无涯&nbsp;|&nbsp;{$info.t_name}</li>
+        </ol>
+        <div class="col-md-8 row-l articles">
+		<h5>
+			<eq name="$info.a_original" value="1">
+				<span class="original">【原创】</span>
+			<else />
+				<span class="reprint">【转载】</span>
+			</eq>
+			<a href="{:U('/article-'.$v['a_id'])}">{$info.a_title}</a>
+		</h5>
+           	<div class="a-write">栏目：{$info.t_name}&nbsp;&nbsp;作者：{$info.a_author}&nbsp;&nbsp;阅读：（{$info.a_hit}）<span class="hidden-xs">更新于：{$info.a_time|getTime}</span></div>
+            <div class="a-content">{$info.a_content}</div>
+            <div class="article-copy hidden-xs">
+                <eq name="info.a_original" value="1">
+                	<p>非特殊说明，本文版权归{$info.a_author}所有，转载请注明出处.</p>
+                	<p>本文标题：{$info.a_title}</p>
+                	<p>本文网址：<a>{$Think.config.SITE_URL}.com/article-{$info.a_id}.html</a>.</p>
+                	<p>本文标签：<a>{$info.a_keyword}</a></p>
+                <else/>
+                	<p>本文系{$info.a_author}创作，可自由转载、引用，但需署名作者且注明文章出处..</p>
+                	<p>本文标题：{$info.a_title}</p>
+                	<p>原文网址：<a>功能暂未开放</a>.</p>
+                	<p>本文标签：<a>{$info.a_keyword}</a></p>
+                	发表自：&nbsp;{$info.a_from}&nbsp;&nbsp;位于：{$info.a_ip|getIp}&nbsp;&nbsp;评论：&nbsp;{$common|count}&nbsp;&nbsp;关键词：&nbsp;{$info['a_keyword']?$info['a_keyword']:'暂无标签'}&nbsp;&nbsp;
+            	</eq>
+            </div>
+            <hr />
+			<div class="bdsharebuttonbox fenxiang hidden-xs">
+				<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+				<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+				<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+				<a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
+				<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a></div>
+			<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+			<div class="a-up"><p>上一篇：<empty name="up.a_id">&nbsp;没有了<else /><a title='{$up.a_title}' href="{:U('/article-'.$up['a_id'])}">&nbsp;{$up.a_title|msubstr=0,40,'utf-8',ture}</a></empty></p></div>
+            <div class="a-down"><p>下一篇：<empty name="down.a_id">&nbsp;没有了<else /><a title='{$down.a_title}' href="{:U('/article-'.$down['a_id'])}">&nbsp;{$down.a_title|msubstr=0,40,'utf-8',ture}</a></empty></p></div>
+        </div>
+    <include file="Public:sider"/>
+    <include file="Public:foot"/>
+</body>
+</html>

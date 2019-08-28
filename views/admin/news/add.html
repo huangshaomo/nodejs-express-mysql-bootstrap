@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="renderer" content="webkit">
+  <title></title>
+  <link rel="stylesheet" href="/public/admin/css/pintuer.css">
+  <link rel="stylesheet" href="/public/admin/css/admin.css">
+  <link rel="stylesheet" href="/public/baidu/prism/prism.css">
+  <script src="/public/admin/js/jquery.js"></script>
+  <script src="/public/admin/js/pintuer.js"></script>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <script type="text/javascript" charset="utf-8" src="/public/baidu/ueditor.config.js"></script>
+  <script type="text/javascript" charset="utf-8" src="/public/baidu/ueditor.all.min.js"> </script>
+  <script type="text/javascript" src="/public/baidu/prism/prism.js"></script>
+  <!-- 
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+ 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css"> -->
+  <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+  <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+  <script type="text/javascript" charset="utf-8" src="/public/baidu/lang/zh-cn/zh-cn.js"></script>
+</head>
+
+<body>
+  <div class="panel admin-panel">
+    <div class="panel-head"><strong><span class="icon-key"></span> 添加新闻</strong></div>
+    <div class="body-content">
+
+      <form method="post" class="form-x" action="" enctype="multipart/form-data">
+
+        <div class="form-group">
+          <div class="label">
+            <label for="sitename">文章标题：</label>
+          </div>
+          <div class="field">
+            <input type="text" class="input " id="" name="title" size="50" placeholder="请输入文章标题"
+              data-validate="required:请输入文章标题" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="label">
+            <label for="sitename">文章关键字：</label>
+          </div>
+          <div class="field">
+            <input type="text" class="input " id="" name="keywords" size="50" placeholder="请输入新闻关键字"
+              data-validate="required:请输入新闻关键字" />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label for="sitename">文章描述：</label>
+          </div>
+          <div class="field">
+            <input type="text" class="input " id="" name="description" size="50" placeholder="请输入新闻描述"
+              data-validate="required:请输入新闻描述" />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label for="sitename">文章简介：</label>
+          </div>
+          <div class="field">
+            <input type="text" class="input " id="" name="info" size="50" placeholder="请输入新闻简介"
+              data-validate="required:请输入新闻简介" />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label for="sitename">文章作者：</label>
+          </div>
+          <div class="field">
+            <input type="text" class="input " id="" name="author" size="50" placeholder="请输入新闻作者"
+              data-validate="required:请输入新闻作者" />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label for="sitename">文章分类：</label>
+          </div>
+          <div class="field">
+            <select name="cid" id="" class="input">
+              <% data.forEach(item=>{%>
+              <option value="<%= item.id%>"><%= item.name%></option>
+              <% }) %>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="label">
+            <label for="sitename">文章封面：</label>
+          </div>
+          <div class="field">
+            <input type="file" class="input " id="" name="img" size="50" data-validate="required:请选择新闻封面图片" />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label for="sitename">文章内容：</label>
+          </div>
+          <div class="field">
+            <!-- 引入ueditor编辑器 -->
+            <script id="editor" type="text/plain" name="text" style="width:100%;height:500px;"></script>
+            <div id="result" style="border: 1px solid #ddd; padding: 20px;"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label></label>
+          </div>
+          <div class="field">
+            <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    var ue = UE.getEditor('editor');
+    ue.ready(function () {
+      $('#submit').click(function () {
+        var contentHtml = ue.getContent();
+
+        // 把编辑好的内容提交给服务器
+        $.post('/editor', {
+          content: contentHtml
+        }, function (res) {
+          $('#result').html(res);
+        });
+      });
+    });
+
+     // 插入 code 标签函数
+        // @param  content 为异步获取的内容
+        // @param  container 为放置这些内容的容器
+        function insertCodeElement(content, container){
+            container = container || document;
+ 
+            // 创建一个 div 来放置获取到的内容，这样就可以把 content 字符串内容转换成 dom
+            // 方便我们对这个 dom 进行操作（只是创建 div，并没有插入到文档，他只存在于内存中）
+            var parent = document.createElement('div');
+            parent.innerHTML = content;
+            
+            // 找到 parent 中的所有 pre 标签，并遍历
+            var $pres = $(parent).find('pre');
+            $pres.each(function(index, el) {
+                var $el = $(el),
+                    html = $el.html(),
+                    code = document.createElement('code'),
+                    elClass = $el.attr('class'),
+                    // 获取 pre 标签中，class 属性中包含的本段代码所有的编程语言
+                    language = elClass.substring(6, elClass.indexOf(';'));
+ 
+                code.className = 'language-' + language;
+                code.innerHTML = html;
+ 
+                $el.html(code);
+            });
+ 
+            $(container).html(parent.innerHTML);
+ 
+            // 最后，调用 Prism 的方法来高亮代码
+            Prism.highlightAll();
+        }
+  </script>
+</body>
+
+</html>

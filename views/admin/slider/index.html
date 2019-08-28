@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="renderer" content="webkit">
+	<title></title>
+	<link rel="stylesheet" href="/public/admin/css/pintuer.css">
+	<link rel="stylesheet" href="/public/admin/css/admin.css">
+	<script src="/public/admin/js/jquery.js"></script>
+	<script src="/public/admin/js/pintuer.js"></script>
+</head>
+
+<body>
+	<div class="panel admin-panel">
+		<div class="panel-head"><strong class="icon-reorder"> 轮播图列表</strong> <a href=""
+				style="float:right; display:none;">添加字段</a></div>
+		<div class="padding border-bottom">
+			<ul class="search" style="padding-left:10px;">
+				<li> <a class="button border-main icon-plus-square-o" href="/admin/slider/add"> 添加轮播图</a> </li>
+				<li>
+					<form action="" method="get">
+						<input type="text" placeholder="请输入搜索关键字" name="search" class="input"
+							style="width:250px; line-height:17px;display:inline-block" />
+						<button class="button border-main icon-search">搜索</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+		<table class="table table-hover text-center">
+			<tr>
+				<th width="100" style="text-align:left; padding-left:20px;">ID</th>
+				<th>轮播图名</th>
+				<th>轮播图片</th>
+				<th>跳转地址</th>
+				<th>排序</th>
+				<th width="310">操作</th>
+			</tr>
+			<% data.forEach(item=>{%>
+			<tr>
+				<td><%=item.id%></td>
+				<td><%=item.name%></td>
+				<td><img style="width: 150px;" src="<%=item.img%>" alt=""></td>
+				<td><%=item.url%></td>
+				<td>
+					<input style="width: 50px;text-align:center;" type="number" name="" value="<%=item.sort%>" id=""
+						onchange ="sorts(this,`<%= item.id %>`)">
+				</td>
+				<td>
+					<div class="button-group">
+						<a class="button border-main" href="/admin/slider/edit?id=<%= item.id %>"><span
+								class="icon-edit"></span> 修改</a>
+						<a class="button border-red" href="javascript:void(0)"
+							onclick="del(this,`<%= item.id %>`,`<%= item.img %>`)"><span class="icon-trash-o"></span>
+							删除</a>
+					</div>
+				</td>
+			</tr>
+			<% }) %>
+			<tr>
+				<td colspan="8">
+					<div class="pagelist"> 
+						<%- show%>
+					</div>
+				</td>
+			</tr>
+		</table>
+		
+	</div>
+	</form>
+
+	<script>
+		// 删除方法
+		function del(obj, id, img) {
+			// 确认信息
+			if (confirm('确认要删除这条数据吗？')) {
+				// 发送ajax请求删除数据
+				$.get("/admin/slider/ajax_del", { id: id, img: img }, function (data) {
+					if (data == 1) {
+						$(obj).parent().parent().parent().remove(); //从a开始往上找父级tr并删除tr
+						alert("数据已删除");
+					}
+				});
+			}
+		}
+
+		// 无刷新更改状态
+		function sorts(obj,id){
+			// 获取排序框的内容
+			let sort = $(obj).val()
+			// 发送ajax请求进行数据修改
+			$.get("/admin/slider/ajax_sort",{id,sort},function(data){
+				// 判断是否执行成功
+				if(data == 1){
+					window.location.reload();
+				}
+			});
+		}	
+	</script>
+</body>
+
+</html>

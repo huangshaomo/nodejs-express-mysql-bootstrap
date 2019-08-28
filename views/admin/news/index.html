@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="renderer" content="webkit">
+	<title></title>
+	<link rel="stylesheet" href="/public/admin/css/pintuer.css">
+	<link rel="stylesheet" href="/public/admin/css/admin.css">
+	<script src="/public/admin/js/jquery.js"></script>
+	<script src="/public/admin/js/pintuer.js"></script>
+</head>
+
+<body>
+	<div class="panel admin-panel">
+		<div class="panel-head"><strong class="icon-reorder"> 新闻列表</strong> <a href=""
+				style="float:right; display:none;">添加字段</a></div>
+		<div class="padding border-bottom">
+			<ul class="search" style="padding-left:10px;">
+				<li> <a class="button border-main icon-plus-square-o" href="/admin/news/add"> 添加新闻</a> </li>
+				<li>
+					<form action="" method="get">
+						<input type="text" value="<%= search %>" placeholder="请输入搜索关键字" name="search" class="input"
+							style="width:250px; line-height:17px;display:inline-block" />
+						<button class="button border-main icon-search">搜索</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+		<table class="table table-hover text-center">
+			<tr>
+				<th width="100" style="text-align:left; padding-left:20px;">ID</th>
+				<th>文章标题</th>
+				<th>文章封面图</th>
+				<th>文章分类</th>
+				<th>文章作者</th>
+				<th>发布时间</th>
+				<th>浏览量</th>
+				<th width="310">操作</th>
+			</tr>
+			<% data.forEach(item=>{%>
+				<tr>
+					<td><%= item.id%></td>
+					<td><%= item.title%></td>
+					<td><img style="width: 150px;" src="<%= item.img%>" alt=""></td>
+					<td><%= item.tname%></td>
+					<td><%= item.author%></td>
+					<td><%= item.time%></td>
+					<td><%= item.num%></td>
+					<td>
+						<div class="button-group">
+							<a class="button border-main" href="/admin/news/edit?id=<%= item.id%>"><span class="icon-edit"></span> 修改</a> 
+							<a class="button border-red" href="javascript:void(0)" onclick="del(this,`<%= item.id %>` ,`<%= item.img%>`)"><span
+							class="icon-trash-o"></span> 删除</a>
+						</div>
+					</td>
+				</tr>
+			
+				<%})%>
+				<tr>
+						<td colspan="8">
+							<div class="pagelist"> 
+								<%- show%>
+							</div>
+						</td>
+					</tr>
+
+	</table>
+	</div>
+	</form>
+
+	<script>
+		function del(obj,id,img){
+			if(confirm("您确认要删除吗？")){
+				$.get("/admin/news/ajax_del",{id:id,img:img},function(data){
+					if(data == 1){
+						window.location.reload();
+						alert("删除成功")
+					}else{
+						alert("删除失败");
+					}
+				});
+			}
+		}
+	</script>
+</body>
+
+</html>

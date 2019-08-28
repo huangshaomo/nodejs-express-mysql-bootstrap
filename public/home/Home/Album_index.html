@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title>相册 - {$Think.config.NAME}</title>
+	<meta name="keywords" content="{$system.keyword}" />
+	<meta name="description" content="{$system.remark}" />
+	<meta name="version" content="{$Think.config.NAME} v{$version}" />
+	<meta name="author" content="{$system.author}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <include file="Public:nav"/>
+    <div class="row aerousel">
+        <ol class="breadcrumb">
+              <li><a href="index.html">网站首页</a></li>
+              <li class="active">匆匆那年&nbsp;|&nbsp;相册</li>
+        </ol>
+        <div class="row-l col-md-8">
+		<ul class="album-div">
+        <volist name="albumList" id="v">
+          	<li class="album-li">
+                <div class="image-light album-img">
+                  	<img src="{$v.al_img}" alt="{$v.al_name}">
+                </div>
+                <div class="caption album-remark">
+                    <h5>{$v.al_name}</h5>
+                    <a href="{:U("/album-".$v['al_id'])}" class="btn btn-primary btn-xs" role="button">查看全部</a>
+                </div>
+        	</li>
+        </volist>
+        </ul>
+        {$page}
+        </div>
+    <include file="Public:sider"/>
+    <include file="Public:foot"/>
+</body>
+</html>

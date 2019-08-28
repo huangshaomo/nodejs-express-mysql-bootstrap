@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<title>访客邻居 - {$Think.config.NAME}</title>
+	<meta name="keywords" content="{$system.keyword}" />
+	<meta name="description" content="{$system.remark}" />
+	<meta name="version" content="{$Think.config.NAME} v{$version}" />
+	<meta name="author" content="{$system.author}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<include file="Public:nav"/>
+	<div class="row aerousel">
+	<ol class="breadcrumb">
+		  <li><a href="index.html">网站首页</a></li>
+		  <li class="active">访客邻居&nbsp;|&nbsp;访客</li>
+	</ol>
+	<div class="col-md-8 row-l">
+		<div class="friends-box">
+		<h4>QQ访客<small class="link-small">此处为通过QQ登陆本网站</small></h4><hr>
+		<ul  class="friends">
+		<volist name="QQ" id="v">
+			<li>
+				<img src="{$v.q_img}" title="{$v.q_name}.最近登陆{$v.q_num}次" class="img-circle img-50">
+			</li>
+		</volist>
+		</ul>
+		</div>
+		<div class="friends-box">
+		<h4>友情链接<small class="link-small">此处为申请友链通过链接</small></h4><hr>
+		<div class="links">
+			<ul class="link-ul">
+			<volist name="links" id="v">
+				<li><a href="{$v.l_url}" target="_blank" title="{$v.l_remark}">{$v.l_name}</a></li>
+			</volist>
+			</ul>
+		</div>
+		</div>
+		<div class="friends-box">
+		<h4>群链接<small class="link-small">此处为QQ群友链接</small></h4><hr>
+		<div class="links">
+			<ul class="link-ul">
+				<volist name="flinks" id="v">
+				<li><a href="{$v.l_url}" target="_blank" title="{$v.l_remark}">{$v.l_name}</a></li>
+			</volist>
+			</ul>
+		</div>
+		</div>
+		<div class="home-from">
+			<form  method="post" role="form" >
+			<input id="jump" type="hidden"  value="__SELF__" />	
+			<div class="input-group home-from-box">
+			  <span class="input-group-addon" id="basic-addon1">名称</span>
+			  <input type="text" class="form-control" placeholder="(必填)网站名称" aria-describedby="basic-addon1" id="name" >
+			</div>
+			<div class="input-group home-from-box">
+			  <span class="input-group-addon" id="basic-addon1">邮箱</span>
+			  <input type="email" class="form-control" placeholder="(必填)邮箱" aria-describedby="basic-addon1" id="email">
+			</div>
+			<div class="input-group home-from-box">
+			  <span class="input-group-addon" id="basic-addon1">域名</span>
+			  <input type="url" class="form-control" placeholder="(必填) 例：http://www.loveteemo.com" aria-describedby="basic-addon1" id="url">
+			</div>
+			<div class="form-group home-from-box">
+				<textarea class="form-control" id="content-text" id="content" rows="3" placeholder="请简要描述下您的网站"></textarea>
+			</div>
+			<div class="input-group home-from-box ">
+			    <span class="input-group-addon" id="basic-addon1">验证码</span>
+			    <div class="input-group check-text">
+			      <input type="text" class="form-control" name="txt_check" id="txt_check" placeholder="验证码" >
+			    </div>
+			    <img style="cursor:pointer" class="img"  src="{:U('Home/Common/verify')}" onClick="this.src=this.src+'?'+Math.random();" title="看不清楚?点击刷新验证码?">				    
+			  </div>
+			<div class="form-group home-from-box">
+				<button class="btn btn-default btn-add-link" type="button" value="">提交</button>
+			</div>
+			</form>
+		</div>
+	</div>
+	<include file="Public:sider"/>
+<include file="Public:foot"/>
+</body>
+</html>

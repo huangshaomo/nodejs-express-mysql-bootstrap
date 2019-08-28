@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="renderer" content="webkit">
+  <title></title>
+  <link rel="stylesheet" href="/public/admin/css/pintuer.css">
+  <link rel="stylesheet" href="/public/admin/css/admin.css">
+  <script src="/public/admin/js/jquery.js"></script>
+  <script src="/public/admin/js/pintuer.js"></script>
+</head>
+
+<body>
+  <div class="panel admin-panel">
+    <div class="panel-head"><strong><span class="icon-key"></span> 添加会员</strong></div>
+    <div class="body-content">
+
+      <form method="post" class="form-x" action="" enctype="multipart/form-data">
+        <div class="form-group">
+          <div class="label">
+            <label for="sitename">账户：</label>
+          </div>
+          <div class="field">
+            <input type="text" class="input w50" id="mpass" name="username" size="50" placeholder="请输入会员账户"
+              data-validate="required:请输入会员账户,length#>=6:账户名不能小于6位,length#<=12:账户名最多12位" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="label">
+            <label for="sitename">密码：</label>
+          </div>
+          <div class="field">
+            <input type="password" class="input w50" name="password" size="50" placeholder="请输入密码"
+              data-validate="required:请输入密码,length#>=8:密码不能小于8位" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="label">
+            <label for="sitename">确认密码：</label>
+          </div>
+          <div class="field">
+            <input type="password" class="input w50" name="repassword" size="50" placeholder="请再次输入密码"
+              data-validate="required:请再次输入密码,repeat#password:两次输入的密码不一致" />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label for="sitename">头像：</label>
+          </div>
+          <div class="field">
+            <input type="file" name="avatar" οnchange="showImg(this)">
+            <img id="showimg" src="" style="display:none;" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="label">
+            <label for="sitename">状态：</label>
+          </div>
+          <div class="field">
+            <label for="" style="line-height: 32px;"><input type="radio" name="status" value="0" checked>白名单</label>
+            <label for="" style="line-height: 32px;"><input type="radio" name="status" value="1">黑名单</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="label">
+            <label></label>
+          </div>
+          <div class="field">
+            <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- <script>
+    function showImg(thisimg) {
+      var file = thisimg.files[0];
+      if (window.FileReader) {
+        var fr = new FileReader();
+
+        var showimg = document.getElementById('showimg');
+        fr.onloadend = function (e) {
+          showimg.src = e.target.result;
+        };
+        fr.readAsDataURL(file);
+        showimg.style.display = 'block';
+        console.log(file);
+      }
+    }
+  </script> -->
+</body>
+
+</html>

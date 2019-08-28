@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>说说详情 - {$Think.config.NAME}</title>
+	<meta name="keywords" content="{$system.keyword}" />
+	<meta name="description" content="{$system.remark}" />
+	<meta name="version" content="{$Think.config.NAME} v{$version}" />
+	<meta name="author" content="{$system.author}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="__CSS__/shCore.min.css" />
+	<script src="__JS__/shCore.min.js" ></script>
+	<script type="text/javascript">
+		SyntaxHighlighter.config.clipboardSwf = '__IMG__/clipboard.swf';
+		SyntaxHighlighter.all();
+	</script>
+    <include file="Public:nav"/>
+    <div class="row aerousel">
+        <ol class="breadcrumb">
+            <li><a href="index.html">网站首页</a></li>
+            <li class="active">闲言碎语&nbsp;|&nbsp;说说详情</li>
+        </ol>
+        <div class="col-md-8 row-l articles">
+        	<div class="media feel-info">
+				<div class="media-left media-middle">
+				    <a href="#">
+				      <img class="media-object img-50" src="{$system.admin_img}" alt="{$info.s_author}" />
+				    </a>
+				</div>
+				<div class="media-body feel-info-content">				    
+				    {$info.s_content}				    
+				</div>
+				<div class="media-heading feel-info-title">{$info.s_author} 在{$info.s_ip|getIp} 用  <a class="from">{$info.s_from}</a> 发表</div>
+			<hr />
+        	</div>
+            <div class="a-up"><p>上一篇：<empty name="up.s_id">&nbsp;没有了<else /><a title='{$up.s_content}' href="{:U('/feel-'.$up['s_id'])}">&nbsp;{$up.s_content|strip_tags|msubstr=0,40,'utf-8',ture}</a></empty></p></div>
+            <div class="a-down"><p>下一篇：<empty name="down.s_id">&nbsp;没有了<else /><a title='{$down.s_content}' href="{:U('/feel-'.$down['s_id'])}">&nbsp;{$down.s_content|strip_tags|msubstr=0,40,'utf-8',ture}</a></empty></p></div>
+            <hr />  
+            <volist name="common" id="vo">
+            <div class="media connect">
+            <div class="media-left">
+                <notempty name="vo.sc_url">
+                <a href="{$vo.sc_url}" target="_blank" rel="nofollow" title="浏览 {$vo.sc_name} 的网站?"><img class="media-object img-circle  img-50" src="{$vo.sc_img}" alt="{$vo.sc_name}"></a>
+                <else />
+                <img src="{$vo.sc_img}" class="media-object img-circle img-50" alt="{$vo.sc_name}"/>
+                </notempty>
+                </div>
+                <div class="media-body">
+					<div class="fool">#{$vo.sc_id}</div>
+                    <p class="media-heading"><a><span class="glyphicon glyphicon-user"></span></a>&nbsp;&nbsp;&nbsp;{$vo.sc_name}&nbsp;&nbsp;&nbsp;<a><span class="glyphicon glyphicon-time"></span></a>&nbsp;{$vo.sc_time|getTime}&nbsp;&nbsp;&nbsp;&nbsp;<a class="from">{$vo.sc_from}</a>&nbsp;&nbsp;&nbsp;&nbsp;<a><span class="glyphicon glyphicon-map-marker"></span></a>&nbsp;&nbsp;{$vo.ip}</p>
+                    <div class="connect-box"> {$vo.sc_content|reFace}</div>
+                    <notempty name="vo.sc_rtime">
+                   	<hr class="content-hr" />
+                    <div class="media">
+                        <div class="media-left">
+                        <a><img class="media-object img-circle img-50" src="{$system.admin_img}" alt="{$vo.sc_rname}"></a>
+                        </div>
+                        <div class="media-body">
+                        <p class="media-heading"><a><span class="glyphicon glyphicon-king"></span></a>&nbsp;&nbsp;&nbsp;{$vo.sc_rname}&nbsp;&nbsp;&nbsp;<a><span class="glyphicon glyphicon-send"></span></a>&nbsp;{$vo.sc_rtime|date="m-d H:i",###}&nbsp;&nbsp;&nbsp;&nbsp;回复&nbsp;<a>@{$vo.sc_name}</a>&nbsp;中说到：</p>
+                        <div class="connect-box">{$vo.sc_rcontent|reFace}</div>
+                        </div>
+                    </div>	
+                    </notempty>
+                </div>
+            </div>
+            <hr />
+            </volist>
+            <div class="home-from">
+                <div class="home-from-model" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">留下脚印</div>
+                <div class="collapse" id="collapseExample">
+                    <div class="well">
+                    <div method="post" >
+					<input id="sid" type="hidden" value="{$info.s_id}" />
+					<input id="stitle" type="hidden"  value="{$info.s_content|strip_tags|msubstr=0,40,'utf-8',ture}" />
+					<input id="jump" type="hidden"  value="__SELF__" />
+					<include file="Public:form"/>					
+					<div class="form-group home-from-box">
+					    <button class="btn btn-default btn-add-say" >提交</button>
+					</div>
+                    </div>
+                    </div>
+               	</div>
+            </div>
+        </div>
+    <include file="Public:sider"/>
+    <include file="Public:foot"/>
+</body>
+</html>
