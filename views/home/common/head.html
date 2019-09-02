@@ -2,15 +2,14 @@
     <nav class="navbar navbar-default" id="navbar">
         <div class="container">
             <div class="header-topbar hidden-xs link-border">
-                 <ul class="site-nav topmenu">
+              <ul class="site-nav topmenu">
                 <!-- <li><a href="tags.html">标签云</a></li> -->
                 <li class="dropdown <%- loginUser ? '' : 'hide' %>"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" rel="nofollow" id="dropdown-toggle">
                     <img src="<%- loginUser ? userAvatar : '' %>" ></a>
                     <ul class="dropdown-menu header-topbar-dropdown-menu">
                       <li><a data-toggle="modal" data-target="#WeChat" rel="nofollow"> 个人中心</a></li>
                       <li><a data-toggle="modal" data-target="#forgetModal">修改密码</a></li>
-                      <li><a href="/logout"> 退出登录</a></li>
-                      <!-- <li><a data-toggle="modal" data-target="#areDeveloping" rel="nofollow" href="/logout"> 退出登录</a></li> -->
+                      <li><a onclick="logout(`<%= newsData.id %>`)" > 退出登录</a></li>
                     </ul>
                   </li>
               </ul>
@@ -42,5 +41,17 @@
                     </form>
                 </div>
             </div>
+            <div class="header-Topbar2 hide">
+                <ul class="site-nav topmenu">
+                    <!-- <li><a href="tags.html">标签云</a></li> -->
+                    <li class="dropdown <%- loginUser ? '' : 'hide' %>"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" rel="nofollow" id="dropdown-toggle">
+                        <img src="<%- loginUser ? userAvatar : '' %>" ></a>
+                        <ul class="dropdown-menu header-topbar-dropdown-menu">
+                          <li><a data-toggle="modal" data-target="#WeChat" rel="nofollow"> 个人中心</a></li>
+                          <li><a data-toggle="modal" data-target="#forgetModal">修改密码</a></li>
+                          <li><a onclick="logout(`<%= newsData.id %>`)" > 退出登录</a></li>
+                        </ul>
+                      </li>
+                  </ul></div>
     </nav>
 </header>

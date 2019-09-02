@@ -20,12 +20,19 @@ const moment = require('moment');
 //载入MD5密码加密模块
 let crypto = require('crypto');
 
+//设置文件上传
+const multer = require("multer");
+
+// 设置存放文件的临时目录
+const upload = multer({ dest: "tmp/" });
+// 引入path模块获取文件名后缀
+const path = require('path');
+// 引入图片上传方法
+// const myuploads = require("../common/myuploads");
+
 // 前台首页
 router.get('/', function (req, res, next) {
-	// 服务器接收请求，再给响应设置一个Cookie
-	// 这个cookie的name 为testName
-	// value 为testValue
-	console.log(req.session);
+	// console.log(req.session);
 	// 读取网站配置相关文件
 	let webConfigData = fs.readFileSync(__dirname + "/../config/webConfig.json");
 	// 获取到的是一个buffer流，需要转换成json对象
@@ -70,7 +77,7 @@ router.get('/', function (req, res, next) {
 										newsData: data3,
 										hotData: data4,
 										loginUser: loginUser,
-										userAvatar:userAvatar
+										userAvatar: userAvatar
 									});
 								}
 							});
@@ -125,9 +132,9 @@ router.get('/list', function (req, res, next) {
 							data3.forEach(item => {
 								item.time = moment(item.time * 1000).format("YYYY-MM-DD HH:mm:ss");
 							})
-							if (req.session.isLogin && req.session.homeUsername &&req.session.userAvatar) {
+							if (req.session.isLogin && req.session.homeUsername && req.session.userAvatar) {
 								var loginUser = req.session.homeUsername;
-								var userAvatar=req.session.userAvatar
+								var userAvatar = req.session.userAvatar
 							}
 							// 加载首页
 							res.render("home/list.html", {
@@ -137,8 +144,8 @@ router.get('/list', function (req, res, next) {
 								newsData: data2,
 								hotData: data3,
 								loginUser: loginUser,
-								userAvatar:userAvatar
-								
+								userAvatar: userAvatar
+
 
 							});//不需要写后缀
 						}
@@ -199,7 +206,7 @@ router.get('/news', function (req, res, next) {
 										} else {
 											if (req.session.isLogin && req.session.homeUsername && req.session.userAvatar) {
 												var loginUser = req.session.homeUsername;
-												var userAvatar=req.session.userAvatar;
+												var userAvatar = req.session.userAvatar;
 											}
 											// 加载首页
 											res.render("home/news.html", {
@@ -210,7 +217,7 @@ router.get('/news', function (req, res, next) {
 												hotData: data4,
 												relaData: data5,
 												loginUser: loginUser,
-												userAvatar:userAvatar
+												userAvatar: userAvatar
 											});
 										}
 									});
@@ -229,19 +236,10 @@ router.get('/news', function (req, res, next) {
 
 });
 
-
-
 // 前台登录处理操作
 router.post('/login', function (req, res, next) {
 	// 接收传入的数据
 	let { username, password } = req.body;
-	// // 判断用户是否登录——判断请求头是否带有下面两则信息，后台是否登录且用户名是否存在
-	// if (req.session.HsmMessageIsHome && req.session.HsmMessageMyUsername) {
-	// 	next();
-	// 	console.log('ok');
-	// } else {
-	// 	res.send("<script>alert('请登录');location.href = '/';</script>");
-	// }
 	//判断用户是否输入
 	if (username) {
 		if (password) {
@@ -263,7 +261,7 @@ router.post('/login', function (req, res, next) {
 								req.session.isLogin = true;
 								req.session.homeUsername = data[0].username;
 								req.session.userAvatar = data[0].avatar
-								res.send({ ok: true, msg: "欢迎回来", username: req.session.homeUsername,userAvatar:req.session.userAvatar });
+								res.send({ ok: true, msg: "欢迎回来", username: req.session.homeUsername, userAvatar: req.session.userAvatar });
 							}
 
 						} else {
@@ -284,58 +282,128 @@ router.post('/login', function (req, res, next) {
 		res.send("<script>alert('登录失败');location.href = '/';</script>");
 	}
 });
-// 前台登录退出操作
-router.get('/logout',function(req,res,next){
+// ajax前台登录退出操作
+router.get('/ajax_logout', function (req, res, next) {
 	req.session.isLogin = false;
 	req.session.homeUsername = '';
 	req.session.userAvatar = '';
-	res.send("<script>alert('退出成功');location.href ='/'</script>");
+	res.send({ ok: 1, msg: '退出成功' });
 
 });
 
 
-// 前台注册页面
+// 前台注册处理
+router.post("/reg", function (req, res, next) {
+	let { act, username, password, repassword } = req.body;
+	if (username) {
+		if (username.length >= 6 && username.length <= 12) {
+			if (password) {
+				if (password.length >= 8 && password.length <= 14) {
+					if (repassword && repassword === password) {
+						// 判断用户是否已被注册
+						mysql.query("select * from user where username = ?",[username], function (err, data) {
+							if (err) {
+								console.log(err);
+								return "";
+							} else {
+								if (data.length > 0) {
+									res.send({ ok: 0, msg: '该用户名已被注册' });
+								} else {
+									// 对密码进行MD5加密
+									let md5 = crypto.createHash('md5');
+									password = md5.update(password).digest('hex');
+									let time = (Math.round(new Date().getTime()) / 1000);//秒时间戳，需要转换成毫秒
+									let avatar = '/upload/avatar/25c31bb2d1632ef016c7af2f67491593.jpeg';
+									// 执行数据库增加操作
+									mysql.query("insert into user(username,password,time,avatar) value(?,?,?,?)", [username, password, time, avatar], function (err, data2) {
+										if (err) {
+											return "";
+										} else {
+											if (data2.affectedRows == 1) {
+												res.send({ ok: 1, msg: '用户注册成功' });
+											} else {
+												res.send({ ok: 0, msg: '用户注册失败' });
+											}
+										}
+									});
+								}
+							}
+						});
+					} else {
+						res.send({ ok: 0, msg: '两次输入的密码不一致' });
+					}
+				} else {
+					res.send({ ok: 0, msg: '密码长度在8-14之间' });
+				}
+			} else {
+				res.send({ ok: 0, msg: '请输入密码' });
+			}
+		} else {
+			res.send({ ok: 0, msg: '用户名长度在6-12之间' });
+		}
+	} else {
+		res.send({ ok: 0, msg: '请输入用户名' });
+	}
 
-router.post('/reg', function (req, res, next) {
-	let { username, password } = req.body;
-	console.log(username, password);
-	res.send("Blog项目注册页面");
 });
 
 // 用户评论操作
 router.post('/comment', function (req, res, next) {
 	// 获取评论内容、评论文章、评论用户
-	let {commentContent,news_id,user_name} = req.body;
+	let { commentContent, news_id, user_name } = req.body;
 	// 查询当前时间戳
 	let time = (Math.round(new Date().getTime()) / 1000);//秒时间戳，需要转换成毫秒
-	if(user_name){
-	// 查询数据库用户对应ID
-	mysql.query("select id from user where username = ?",[user_name],function(err,data){
-		if(err){
-			// res.send({ok:true,msg:'数据库查询错误'});
-			return err;
-		}else{
-			let userID = data[0].id;
-			// 把用户评论插入数据库
-			mysql.query('insert into comment(user_id,news_id,text,time)  value(?,?,?,?)',[userID,news_id, commentContent,time],function(err,data){
-				if(err){
-					return "";
-				}else{
-					if(data.affectedRows == 1){
-						res.send({ok:true,msg:'评论成功！'});
-					}else{
-						res.send({ok:false,msg:'评论失败！'});
+	if (user_name) {
+		// 查询数据库用户对应ID
+		mysql.query("select id from user where username = ?", [user_name], function (err, data) {
+			if (err) {
+				// res.send({ok:true,msg:'数据库查询错误'});
+				return err;
+			} else {
+				let userID = data[0].id;
+				// 把用户评论插入数据库
+				mysql.query('insert into comment(user_id,news_id,text,time)  value(?,?,?,?)', [userID, news_id, commentContent, time], function (err, data) {
+					if (err) {
+						return "";
+					} else {
+						if (data.affectedRows == 1) {
+							res.send({ ok: true, msg: '评论成功！' });
+						} else {
+							res.send({ ok: false, msg: '评论失败！' });
+						}
 					}
-				}
-			});
+				});
 
-		}
-	});
-	}else{
-		res.send({ok:false,msg:'请登录后在评论'});
+			}
+		});
+	} else {
+		res.send({ ok: false, msg: '请登录后在评论' });
 		return;
 	}
 
 });
+
+router.get('/wp', function (req, res, next) {
+	// 读取网站相关配置信息内容
+	let webConfigData = fs.readFileSync(__dirname + "/../config/webConfig.json");
+	// 获取到的内容是一个buffer流，需要转换成字符串再转换json对象
+	let webConfig = JSON.parse(webConfigData.toString());
+	// 获取session信息
+	if (req.session.isLogin && req.session.homeUsername && req.session.userAvatar) {
+		var loginUser = req.session.homeUsername;
+		var userAvatar = req.session.userAvatar;
+	}
+	res.render("home/wp.html", {
+		webConfig: webConfig,
+		loginUser,
+		userAvatar
+
+	});
+});
+router.post('/uploadup', upload.single('logo'), function (req, res, next) {
+	let imgRes = req.file;
+	console.log(imgRes);
+});
+
 
 module.exports = router;

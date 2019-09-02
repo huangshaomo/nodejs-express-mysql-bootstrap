@@ -88,24 +88,8 @@ app.use("/public/baidu/ueditors", ueditor(path.join(__dirname, ''), function (re
 
 // 使用EJS模板变量值使用<%= variable_name %>输出方式，字符串输出时默认经过escape转义编码。 
 // 当我们想要输出一些动态生成的HTML标签时可使用<%- variable_nam %>输出方式，这种方式不会被escape转义编码。
-//完善nodejs-express-mysql项目首页的路由
-// app.get('/',function(req,res,next){
-
-//     //req request对象，保存客户端请求的相关信息
-//     //res response对象，服务器端输出响应
-//     //next 执行下一个方法
-
-//     //给客户端响应一段文字
-//     // res.send('我要bolg项目首页');
-
-//     // 加载页面
-//     res.render("home/index");//不需要写后缀
-// });
-
-//使用模板引擎创建页面
-
 
 //监听服务器-之后启动app.js
-app.listen(3000,function(){
-    console.log('node 服务器已启动 端口 3000');
+app.listen(3050,function(){
+    console.log('node 服务器已启动 端口 3050');
 })

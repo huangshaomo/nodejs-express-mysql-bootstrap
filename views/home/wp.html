@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit">
+  <!-- 指定网页的兼容性模式设置。IE = edge告诉IE使用最新的引擎渲染网页 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>网盘</title>
+  <link rel="stylesheet" type="text/css" href="public/home/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="public/home/css/nprogress.css">
+  <link rel="stylesheet" type="text/css" href="public/home/css/style.css">
+  <link rel="stylesheet" type="text/css" href="public/home/css/font-awesome.min.css">
+  <link rel="apple-touch-icon-precomposed" href="public/home/images/icon/icon.png">
+  <link rel="shortcut icon" href="public/home/images/icon/favicon.ico">
+  <script src="public/home/js/jquery-2.1.4.min.js"></script>
+  <script src="public/home/js/nprogress.js"></script>
+  <script src="public/home/js/jquery.lazyload.min.js"></script>
+</head>
+<body  class="user-select">
+    <section class="container">
+        <div class="jumbotron" style="display: block">
+            <h1>欢迎进入网盘空间！</h1>
+            <p>这是一个公共的网盘空间，如果你需要上传文件，请 进入私人空间</p>
+            <p><a class="btn btn-primary" href="#" role="button" data-toggle="modal"
+                    data-target="#loginModal">登录/注册</a></p>
+        </div>
+        <form action="/wpregs" method="post" enctype="multipart/form-data">
+        <input type="file" name="img" id="">
+    </form>
+    </section>
+    <% include common/footer.html %>
+    <!-- 登录注册模态框 -->
+    <div class="modal fade modal-style" tabindex="-1" role="dialog" id="loginModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">注册登录框</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div class="form-group">
+                            <label>用户名</label>
+                            <input type="text" name="username" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>密码</label>
+                            <input type="password" name="username" class="form-control">
+                        </div>
+                    </form>
+                    <input type="button" value="登录" class="btn btn-default btn-primary">
+                    <input type="button" value="注册" class="btn btn-default btn-info">
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+  <!-- 右键菜单列表 -->
+  <% include common/rightClickMenu.html%>
+  <script src="public/home/js/bootstrap.min.js"></script>
+  <script src="public/home/js/jquery.ias.js"></script>
+  <script src="public/home/js/scripts.js"></script>
+
+</body>
+
+</html>

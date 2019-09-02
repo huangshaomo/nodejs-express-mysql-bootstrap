@@ -3,7 +3,7 @@
     window.location.reload();
 }*/
 
-//页面加载
+//页面加载-NProgress插件
 $('body').show();
 $('.version').text(NProgress.version);
 NProgress.start();
@@ -23,17 +23,17 @@ function setCookie(name, value, time) {
     var strsec = getsec(time);
     var exp = new Date();
     exp.setTime(exp.getTime() + strsec * 1);
-    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString(); //toGMTString() 方法可根据格林威治时间 (GMT) 把 Date 对象转换为字符串，并返回结果。
 }
 function getsec(str) {
     var str1 = str.substring(1, str.length) * 1;
     var str2 = str.substring(0, 1);
     if (str2 == "s") {
-        return str1 * 1000;
+        return str1 * 1000;//秒
     } else if (str2 == "h") {
-        return str1 * 60 * 60 * 1000;
+        return str1 * 60 * 60 * 1000;//小时
     } else if (str2 == "d") {
-        return str1 * 24 * 60 * 60 * 1000;
+        return str1 * 24 * 60 * 60 * 1000;//24小时
     }
 }
 
@@ -47,7 +47,7 @@ function getCookie(name) {
     }
 }
 
-//导航智能定位
+//导航栏智能定位
 $.fn.navSmartFloat = function () {
     var position = function (element) {
         var top = element.position().top,
@@ -56,6 +56,7 @@ $.fn.navSmartFloat = function () {
             var scrolls = $(this).scrollTop();
             if (scrolls > top) { //如果滚动到页面超出了当前元素element的相对页面顶部的高度
                 $('.header-topbar').fadeOut(0);
+                $('.header-topbar2').fadeIn(0);
                 if (window.XMLHttpRequest) { //如果不是ie6
                     element.css({
                         position: "fixed",
@@ -68,6 +69,7 @@ $.fn.navSmartFloat = function () {
                 }
             } else {
                 $('.header-topbar').fadeIn(500);
+                $('.header-topbar2').fadeOut(0);
                 element.css({
                     position: pos,
                     top: top
@@ -125,11 +127,11 @@ jQuery.ias({
     pagination: '.pagination',
     next: '.next-page a',
     trigger: '查看更多',
-    loader: '<div class="pagination-loading"><img src="/Home/images/loading.gif" /></div>',
+    loader: '<div class="pagination-loading"><img src="public/home/images/loading.gif" /></div>',
     triggerPageThreshold: 5,
     onRenderComplete: function () {
         $('.excerpt .thumb').lazyload({
-            placeholder: '/Home/images/occupying.png',
+            placeholder: 'public/home/images/occupying.png',
             threshold: 400
         });
         $('.excerpt img').attr('draggable', 'false');
@@ -214,71 +216,131 @@ $(function () {
         var articleid = $('.articleid').val();      //获取隐藏框内容
         var loginUsesr = $('.loginUser').val();
         promptBox.fadeIn(400);
-        if(!imgSrc){
+        if (!imgSrc) {
             var str = '<a data-toggle="modal" data-target="#loginModal2">登录?</a>';
-            promptText.html("请登录后再进行评论" +`  `+ str );
+            promptText.html("请登录后再进行评论" + `  ` + str);
+            commentButton.attr('disabled', true);
+            commentButton.addClass('disabled')
+            return false;
+        } else {
+            if (commentContent.val() === '') {
+                promptText.text('请留下您的评论');
+                return false;
+            }
             commentButton.attr('disabled', true);
             commentButton.addClass('disabled');
-            return false;
-        }else{
-        if (commentContent.val() === '') {
-            promptText.text('请留下您的评论');
+            promptText.text('正在提交...');
+            $.ajax({
+                type: "POST",
+                url: "/comment",
+                //url:"/Article/comment/id/" + articleid,   
+                data: {
+                    commentContent: replace_em(commentContent.val()),
+                    news_id: articleid,
+                    user_name: loginUsesr
+
+                },
+                cache: false, //不缓存此页面  
+                success: function (data) {
+                    if (data.ok) {
+                        promptText.text(data.msg);
+                        window.location.reload();
+                    } else {
+                        promptText.text(data.msg);
+                    }
+                    commentContent.val(null);//清空输入框
+                    $(".commentlist").fadeIn(300);
+                    /*$(".commentlist").append();*/
+                    commentButton.attr('disabled', false);
+                    commentButton.removeClass('disabled');
+                }
+            });
+            /*$(".commentlist").append(replace_em(commentContent.val()));*/
+            promptBox.fadeOut(4000);
             return false;
         }
-        commentButton.attr('disabled', true);
-        commentButton.addClass('disabled');
-        promptText.text('正在提交...');
-        $.ajax({
-            type: "POST",
-            url: "/comment",
-            //url:"/Article/comment/id/" + articleid,   
-            data: {
-                commentContent: replace_em(commentContent.val()),
-                news_id: articleid,
-                user_name: loginUsesr
-
-            },
-            cache: false, //不缓存此页面  
-            success: function (data) {
-                if (data.ok) {
-                    promptText.text(data.msg);
-                } else {
-                    promptText.text(data.msg);
-                }
-                commentContent.val(null);//清空输入框
-                $(".commentlist").fadeIn(300);
-                /*$(".commentlist").append();*/
-                commentButton.attr('disabled', false);
-                commentButton.removeClass('disabled');
-            }
-        });
-        /*$(".commentlist").append(replace_em(commentContent.val()));*/
-        promptBox.fadeOut(4000);
-        return false;
-    }
     });
 });
-//对文章内容进行替换
+//对文章内容进行替换_将icon替换成图片地址
 function replace_em(str) {
     str = str.replace(/\</g, '&lt;');
     str = str.replace(/\>/g, '&gt;');
     str = str.replace(/\[em_([0-9]*)\]/g, '<img src="/public/home/images/arclist/$1.gif" border="0" />');
     return str;
 }
-/*文章点赞*/
+// 用户登录注册
 $(function () {
-    $(".zan").click(function () {
-        var num = $(this).html();
-        $(this).toggleClass('zaned');
-        if($(this).hasClass('zaned')){
-            num++;
-            console.log(num);
-        }else{
-            num--;
-            console.log(num);
+    $('#isLogining').val()
+    $("#login_btn").click(function () {
+      $.ajax({
+        url: '/login',
+        type: 'post',
+        data: {
+          act: 'login',
+          username: $("#username").val(),
+          password: $("#password").val()
+        },
+        success: function (json) {
+          if (json.ok) {
+            alert(json.username + "" + json.msg);
+          } else {
+            alert(json.msg);
+          }
+
+          if (json.username) {
+            $('#loginBox').addClass('hide');
+            $('#widget').removeClass('hide');
+            window.location.reload();
+          }
+          $('#loginModal').modal('toggle');
+        },
+        error: function (err) {
+          console.log(err);
+        }
+      });
+    });
+    // 用户注册判断
+    $("#reg_btn").click(function () {
+      $.ajax({
+        url: "/reg",
+        type: "post",
+        data: {
+          username: $("#regUsername").val(),
+          password: $("#regPassword").val(),
+          repassword: $("#regRepassword").val(),
+        },
+        success: function (json) {
+          if (json.ok) {
+            $('#regModal').modal('toggle');
+            window.location.reload();
+          }
+          alert(json.msg);
+
+        },
+        error: function (err) {
+          console.log(err);
+        }
+      });
+    });
+  });
+// 退出登录
+function logout() {
+    $.get("/ajax_logout", function (data) {
+        if (data.ok) {
+            window.location.reload();
         }
     })
-})
+}
+
+// var num = $(this).html();
+//         $(this).toggleClass('zaned');
+//         if ($(this).hasClass('zaned')) {
+//             num++;
+//             console.log(num);
+//         } else {
+//             num--;
+//             console.log(num);
+//         }
 //Console
 try {
     if (window.console && window.console.log) {

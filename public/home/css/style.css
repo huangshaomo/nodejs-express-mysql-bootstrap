@@ -189,8 +189,8 @@ color:#FFF;
 }
 }
 /*头部*/
-.header {
-}
+/* .header {
+} */
 /*导航顶部*/
 .header .dropdown img{
 	width: 45px ;
@@ -526,13 +526,10 @@ color:#FFF;
 /*巨幕*/
 .jumbotron {
 	display: none;
-	padding: 15px;
+	/* padding: 15px; */
 }
 .jumbotron h1 {
 	margin-bottom: 15px;
-}
-.jumbotron p {
-	text-indent: 2em;
 }
 
 @media (max-width: 600px) {
@@ -2202,22 +2199,22 @@ color:#FFF;
 	color: #666;
 }
 /*登录模态框*/
-#loginModal .modal-dialog {
-	max-width: 420px;
+.modal-style .modal-dialog {
+	max-width: 480px;
 	margin-top: 100px;
 }
-#loginModal h4 {
+.modal-style h4 {
 	cursor: default;
 	color: #3399CC;
 }
-#loginModal .modal-body {
+.modal-style .modal-body {
 	padding: 15px 30px;
 }
-#loginModal .modal-body label {
+.modal-style .modal-body label {
 	color: #555;
 	font-size: 15px;
 	font-weight: 500;
 }
-#loginModal .modal-body input {
-	color: #A0A0A0;
+.modal-style .modal-body input {
+	color: #000;
 }
