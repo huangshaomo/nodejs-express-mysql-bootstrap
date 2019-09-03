@@ -173,8 +173,17 @@ NodeJS-Express-Bootstrap-Mysql
 =================================     
     前台首页
 ![Image text](https://github.com/huangshaomo/photo/blob/master/github_img1.jpg)
-    前台分类页
+    分类页
 ![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_homelist.jpg)
     文章详情界面
- ![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_news.jpg)   
+![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_news.jpg)   
     
+    后台登录界面
+![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_adminlogin.jpg)   
+    首页
+![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_admin.jpg)  
+    文章页
+![Image text](https://https://github.com/huangshaomo/photo/blob/master/github_img_admin_news.jpg)     
+    文章添加
+![Image text](https://https://github.com/huangshaomo/photo/blob/master/github_img_admin_newsupload.jpg)    
+......
