@@ -171,6 +171,10 @@ NodeJS-Express-Bootstrap-Mysql
 
 界面预览
 =================================     
-    前台界面
+    前台首页
 ![Image text](https://github.com/huangshaomo/photo/blob/master/github_img1.jpg)
-
+    前台分类页
+![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_homelist.jpg)
+    文章详情界面
+ ![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_news.jpg)   
+    
