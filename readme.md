@@ -169,7 +169,8 @@ NodeJS-Express-Bootstrap-Mysql
         3.0）安装session模块 （实现用户持久登录）
             #npm/cnpm install express-session
 
-     
-
+界面预览
+=================================     
+    前台界面
 ![Image text](https://github.com/huangshaomo/photo/blob/master/github_img1.jpg)
 
