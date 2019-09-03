@@ -183,7 +183,7 @@ NodeJS-Express-Bootstrap-Mysql
     首页
 ![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_admin.jpg)  
     文章页
-![Image text](https://https://github.com/huangshaomo/photo/blob/master/github_img_admin_news.jpg)     
+![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_admin_news.jpg)     
     文章添加
-![Image text](https://https://github.com/huangshaomo/photo/blob/master/github_img_admin_newsupload.jpg)    
+![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_admin_newsupload.jpg)    
 ......
