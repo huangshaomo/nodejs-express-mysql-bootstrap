@@ -1,7 +1,8 @@
-nodejs个人博客项目
+NodeJS-Express-Bootstrap-Mysql
 =================================
-
+213123
 1）前台功能分析
+
     1）用户管理
         1.1）栏目列表
         1.2）轮播图展示
@@ -29,6 +30,7 @@ nodejs个人博客项目
 
 
 2）后台功能分析
+
     1）管理员管理
 
     2）用户管理
@@ -118,9 +120,9 @@ nodejs个人博客项目
 
 
     2）创建项目
-        2.1）在F盘blog文件
+        2.1）在某盘建立项目文件
 
-        2.2）用命令行打开文件（cmd 或powershell 推荐powershell）
+        2.2）用命令行打开文件（cmd 或powershell）
 
         2.3）使用npm init初始化项目
             在nodejs-express-mysql目录下新建一个package.json，存储项目的基本信息
@@ -167,9 +169,30 @@ nodejs个人博客项目
         3.0）安装session模块 （实现用户持久登录）
             #npm/cnpm install express-session
 
+<<<<<<< HEAD
 
 
 界面预览
 =================================
 
 
+=======
+界面预览
+=================================     
+    前台首页
+![Image text](https://github.com/huangshaomo/photo/blob/master/github_img1.jpg)
+    分类页
+![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_homelist.jpg)
+    文章详情界面
+![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_news.jpg)   
+    
+    后台登录界面
+![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_adminlogin.jpg)   
+    首页
+![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_admin.jpg)  
+    文章页
+![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_admin_news.jpg)     
+    文章添加
+![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_admin_newsupload.jpg)    
+等等...
+>>>>>>> 33795f49bd1108dd78699ea0c1d375df81696d24
