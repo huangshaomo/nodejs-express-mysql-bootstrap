@@ -62,7 +62,7 @@
           <ul>
             <% relaData.forEach(item=>{%>
             <% if (item.tid == newsData.tid && item.id !=newsData.id){%>
-            <li><a href="/news?id=<%= item.id%>"><%= item.title%></a></li>
+            <li><a href="/news?id=<%= item.id%>" ><%= item.title%></a></li>
             <%}else{%>
             <% }%>
 
@@ -100,13 +100,13 @@
         </div>
         <div id="postcomments">
           <ol class="commentlist">
-            <% commentData.forEach(item=>{%>
-            <li class="comment-content"><span class="comment-f">#1</span>
+            <% commentData.forEach((item,key)=>{%>
+            <li class="comment-content"><span class="comment-f"></span>
               <div class="comment-avatar"><img class="avatar" src="<%= item.avatar%>" alt="" /></div>
               <div class="comment-main">
                 <p>来自<span class="address">广东广州（<%= item.username%>）</span>用户的评论：<span class="time "
-                    style="float: right">2019-08-27 13:04:05</span><br />
-                  <%- item.text%> <span class="zan">1</span></p>
+                    style="float: right"><%= item.time%></span><br />
+                  <%- item.text%>（#<%= newsDatanum-- %>）<span class="zan" onclick="addzan( `<%- item.user_id%>`)"></span></p>
               </div>
             </li>
             <%})%>
@@ -187,7 +187,7 @@
               <span class="thumbnail"><img class="thumb" src="<%= item.img%>" alt=""></span>
               <span class="text"><%= item.info%></span><span class="muted"><i
                   class="glyphicon glyphicon-time"></i><%= item.time%> </span>
-              <span class="muted"><i class="glyphicon glyphicon-eye-open"></i> <%if(item.num)%></span>
+              <span class="muted"><i class="glyphicon glyphicon-eye-open"></i> <%= item.num%></span>
             </a>
           </li>
           <% }) %>
@@ -293,19 +293,19 @@
   <script src="/public/home/js/scripts.js"></script>
   <script src="/public/home/js/jquery.qqFace.js"></script>
   <script>
-    /*文章点赞*/
     $(function () {
-      $(".zan").click(function () {
-        $.ajax({
-          url: 'ajax_zan',
-          type: 'get',
-          data: {
-            user: $(this).html(),
+      $('.emotion').qqFace({
+        id: 'facebox',
+        assign: 'comment-textarea',
+        path: '/public/Home/images/arclist/'	//表情存放的路径
+      });
+    });
+    /*文章点赞*/
+    function addzan(user_id){
+      $.get('/ajax_zan',{userid:user_id},function(data){
 
-          },
-        })
       })
-    })
+    }
   </script>
 </body>
 

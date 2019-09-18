@@ -86,10 +86,10 @@
             <!-- <div class="more"><a href="">PHP</a><a href="">JavaScript</a><a href="">EmpireCMS</a><a href="">Apache</a><a href="">MySQL</a></div> -->
           </div>
           <% newsData.forEach(item=>{%>
-          <article class="excerpt excerpt-1"><a class="focus" href="/news?id=<%= item.id%>" title=""><img class="thumb"
-                src="<%= item.img%>" alt=""></a>
+          <article class="excerpt excerpt-1">
+            <a class="focus" href="/news?id=<%= item.id%>" title="" onclick="addNum(`<%= item.id%>`)" ><img class="thumb"  src="<%= item.img%>" alt=""></a>
             <header><a class="cat" href="program"><%= item.tname%><i></i></a>
-              <h2><a href="/news?id=<%= item.id%>" title=""><%= item.title%></a></h2>
+              <h2><a href="/news?id=<%= item.id%>" title="标题" onclick="addNum(`<%= item.id%>`)"><%= item.title%></a></h2>
             </header>
             <p class="meta">
               <time class="time"><i class="glyphicon glyphicon-time"></i> <%= item.time%></time>
@@ -173,9 +173,9 @@
             <li>
               <a href="/news?id=<%= item.id%>">
                 <span class="thumbnail">
-                  <img class="thumb" src="<%= item.img%>" alt="">
+                  <img class="thumb" src="<%= item.img%>" alt=""  onclick="addNum(`<%= item.id%>`)" >
                 </span>
-                <span class="text"><%= item.title%></span>
+                <span class="text"  onclick="addNum(`<%= item.id%>`)" ><%= item.title%></span>
                 <span class="muted"><i class="glyphicon glyphicon-time"></i> <%= item.time%>
                 </span>
                 <span class="muted"><i class="glyphicon glyphicon-eye-open"></i> <%= item.num%></span>
@@ -295,9 +295,11 @@
   <script src="public/home/js/jquery.ias.js"></script>
   <script src="public/home/js/scripts.js"></script>
   <script src="public/home/js/uploadStyle.js"></script>
-  <script>
-    // var fileDom = document.getElementById('uploadfile');
-    // uploads(fileDom, 150);
+  <script>  
+      function addNum(newsid){
+        $.get("/ajax_num",{id:newsid},function(data){
+        })
+      }
   </script>
 </body>
 

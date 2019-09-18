@@ -2,11 +2,11 @@
 
 // 导入express
 
-let express = require("express");
+const express = require("express");
 
 // 实例化路由类
 
-let router = express.Router();
+const router = express.Router();
 
 // 导入fs文件处理模块
 const fs = require("fs");
@@ -18,7 +18,7 @@ const mysql = require("../config/db.js");
 const moment = require('moment');
 
 //载入MD5密码加密模块
-let crypto = require('crypto');
+const crypto = require('crypto');
 
 //设置文件上传
 const multer = require("multer");
@@ -34,9 +34,9 @@ const path = require('path');
 router.get('/', function (req, res, next) {
 	// console.log(req.session);
 	// 读取网站配置相关文件
-	let webConfigData = fs.readFileSync(__dirname + "/../config/webConfig.json");
+	const webConfigData = fs.readFileSync(__dirname + "/../config/webConfig.json");
 	// 获取到的是一个buffer流，需要转换成json对象
-	let webConfig = JSON.parse(webConfigData.toString());
+	const webConfig = JSON.parse(webConfigData.toString());
 	// 读取分类信息
 	mysql.query("select * from newstype order by sort desc", function (err, data) {
 		if (err) {
@@ -60,8 +60,7 @@ router.get('/', function (req, res, next) {
 								if (err) {
 									return ""
 								} else {
-									// 获取评论信息
-									mysql.query("select count(*) from comment where news_id");
+ 
 									data4.forEach(item => {
 										item.time = moment(item.time * 1000).format("YYYY-MM-DD ");
 									})
@@ -98,11 +97,11 @@ router.get('/', function (req, res, next) {
 // 前台分类页
 
 router.get('/list', function (req, res, next) {
-	let id = req.query.id;
+	const id = req.query.id;
 	// 读取网站配置相关文件
-	let webConfigData = fs.readFileSync(__dirname + "/../config/webConfig.json");
+	const webConfigData = fs.readFileSync(__dirname + "/../config/webConfig.json");
 	// 获取到的是一个buffer流，需要转换成json对象
-	let webConfig = JSON.parse(webConfigData.toString());
+	const webConfig = JSON.parse(webConfigData.toString());
 
 	// 读取分类数据
 	mysql.query("select * from newstype order by sort desc", function (err, data) {
@@ -110,7 +109,7 @@ router.get('/list', function (req, res, next) {
 			return ""
 		} else {
 			// 获取当前分类信息
-			let typeInfo = "";
+			const typeInfo = "";
 			data.forEach(item => {
 				if (item.id == id) {
 					typeInfo = item;
@@ -165,11 +164,11 @@ router.get('/list', function (req, res, next) {
 
 router.get('/news', function (req, res, next) {
 	// 获取地址栏带的数据
-	let id = req.query.id;
+	const id = req.query.id;
 	// 读取网站配置相关文件
-	let webConfigData = fs.readFileSync(__dirname + "/../config/webConfig.json");
+	const webConfigData = fs.readFileSync(__dirname + "/../config/webConfig.json");
 	// 获取到的是一个buffer流，需要转换成json对象
-	let webConfig = JSON.parse(webConfigData.toString());
+	const webConfig = JSON.parse(webConfigData.toString());
 
 	//加载分类数据
 	mysql.query("select * from newstype order by sort desc", function (err, data) {
@@ -214,10 +213,11 @@ router.get('/news', function (req, res, next) {
 												typeData: data,
 												newsData: data2[0],
 												commentData: data3,
+												newsDatanum:data3.length,
 												hotData: data4,
 												relaData: data5,
 												loginUser: loginUser,
-												userAvatar: userAvatar
+												userAvatar: userAvatar,
 											});
 										}
 									});
@@ -239,12 +239,12 @@ router.get('/news', function (req, res, next) {
 // 前台登录处理操作
 router.post('/login', function (req, res, next) {
 	// 接收传入的数据
-	let { username, password } = req.body;
+	const { username, password } = req.body;
 	//判断用户是否输入
 	if (username) {
 		if (password) {
 			// 对密码进行MD5加密
-			let md5 = crypto.createHash('md5');
+			const md5 = crypto.createHash('md5');
 			password = md5.update(password).digest('hex');
 			// 判断数据库中是否存在该用户
 			mysql.query("select * from user where username = ? and password = ?", [username, password], function (err, data) {
@@ -294,7 +294,7 @@ router.get('/ajax_logout', function (req, res, next) {
 
 // 前台注册处理
 router.post("/reg", function (req, res, next) {
-	let { act, username, password, repassword } = req.body;
+	const { act, username, password, repassword } = req.body;
 	if (username) {
 		if (username.length >= 6 && username.length <= 12) {
 			if (password) {
@@ -310,10 +310,10 @@ router.post("/reg", function (req, res, next) {
 									res.send({ ok: 0, msg: '该用户名已被注册' });
 								} else {
 									// 对密码进行MD5加密
-									let md5 = crypto.createHash('md5');
+									const md5 = crypto.createHash('md5');
 									password = md5.update(password).digest('hex');
-									let time = (Math.round(new Date().getTime()) / 1000);//秒时间戳，需要转换成毫秒
-									let avatar = '/upload/avatar/25c31bb2d1632ef016c7af2f67491593.jpeg';
+									const time = (Math.round(new Date().getTime()) / 1000);//秒时间戳，需要转换成毫秒
+									const avatar = '/upload/avatar/25c31bb2d1632ef016c7af2f67491593.jpeg';
 									// 执行数据库增加操作
 									mysql.query("insert into user(username,password,time,avatar) value(?,?,?,?)", [username, password, time, avatar], function (err, data2) {
 										if (err) {
@@ -350,9 +350,9 @@ router.post("/reg", function (req, res, next) {
 // 用户评论操作
 router.post('/comment', function (req, res, next) {
 	// 获取评论内容、评论文章、评论用户
-	let { commentContent, news_id, user_name } = req.body;
+	const { commentContent, news_id, user_name } = req.body;
 	// 查询当前时间戳
-	let time = (Math.round(new Date().getTime()) / 1000);//秒时间戳，需要转换成毫秒
+	const time = (Math.round(new Date().getTime()) / 1000);//秒时间戳，需要转换成毫秒
 	if (user_name) {
 		// 查询数据库用户对应ID
 		mysql.query("select id from user where username = ?", [user_name], function (err, data) {
@@ -360,7 +360,7 @@ router.post('/comment', function (req, res, next) {
 				// res.send({ok:true,msg:'数据库查询错误'});
 				return err;
 			} else {
-				let userID = data[0].id;
+				const userID = data[0].id;
 				// 把用户评论插入数据库
 				mysql.query('insert into comment(user_id,news_id,text,time)  value(?,?,?,?)', [userID, news_id, commentContent, time], function (err, data) {
 					if (err) {
@@ -383,11 +383,16 @@ router.post('/comment', function (req, res, next) {
 
 });
 
+// ajax获取用户评论操作
+router.get('/news/ajax_zan',function(req,res,next){
+	console.log(req.query);
+})
+
 router.get('/wp', function (req, res, next) {
 	// 读取网站相关配置信息内容
-	let webConfigData = fs.readFileSync(__dirname + "/../config/webConfig.json");
+	const webConfigData = fs.readFileSync(__dirname + "/../config/webConfig.json");
 	// 获取到的内容是一个buffer流，需要转换成字符串再转换json对象
-	let webConfig = JSON.parse(webConfigData.toString());
+	const webConfig = JSON.parse(webConfigData.toString());
 	// 获取session信息
 	if (req.session.isLogin && req.session.homeUsername && req.session.userAvatar) {
 		var loginUser = req.session.homeUsername;
@@ -400,8 +405,37 @@ router.get('/wp', function (req, res, next) {
 
 	});
 });
+// ajax_num文章阅读量
+router.get('/ajax_num',function(req,res,next){
+	// 获取参数
+	const id = req.query.id;
+	console.log(id);
+	// 执行数据库查找操作
+	mysql.query("select num from news where id = " + id, function (err, data) {
+		if(err){
+			console.log(err);
+			return "";
+		}else{
+			const num = data[0].num +1;
+			// 执行数据库更新操作
+			mysql.query(`update news set num = ${num} where id = ${id}`,function(err,data){
+				if(err){
+					console.log(err);
+					return "";
+				}else{
+					if(data.affectedRows == 1){
+						res.send('ok:1');
+					}else{
+						res.send('ok:0');
+					}
+				}
+			});
+		}
+	});
+})
+
 router.post('/uploadup', upload.single('logo'), function (req, res, next) {
-	let imgRes = req.file;
+	const imgRes = req.file;
 	console.log(imgRes);
 });
 

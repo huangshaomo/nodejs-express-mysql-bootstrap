@@ -1,8 +1,8 @@
 //导入express框架
-let express = require("express");
+const express = require("express");
 
 //1.初始化express
-let app  = express();
+const app  = express();
 
 //处理post请求
 const bodyParser = require("body-parser");
@@ -24,9 +24,9 @@ app.use(session({
 }));
 
 //2.设置模板引擎相关信息,首先要用npm安装模板引擎 npm install ejs
-let ejs = require("ejs");
+const ejs = require("ejs");
 
-let path = require("path");
+const path = require("path");
 //3.设置资源模板的存放目录
 //第一个参数,固定的
 //第二个参数：模板存放的目录
@@ -49,10 +49,10 @@ app.use("/images",express.static(__dirname+"/images"));
 
 
 //导入前台的路由文件
-let indexRouter = require("./routers/index");
+const indexRouter = require("./routers/index");
 
 //导入后台的路由文件
-let adminRouter = require("./routers/admin");
+const adminRouter = require("./routers/admin");
 // 使用前台的路由
 // 参数1：匹配的路由规则
 // 参数2:请求路由规则
@@ -90,6 +90,6 @@ app.use("/public/baidu/ueditors", ueditor(path.join(__dirname, ''), function (re
 // 当我们想要输出一些动态生成的HTML标签时可使用<%- variable_nam %>输出方式，这种方式不会被escape转义编码。
 
 //监听服务器-之后启动app.js
-app.listen(3050,function(){
-    console.log('node 服务器已启动 端口 3050');
+app.listen(3000,'0.0.0.0',function(){
+    console.log('node 服务器已启动 端口 3000');
 })

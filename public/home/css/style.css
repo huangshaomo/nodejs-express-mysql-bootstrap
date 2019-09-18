@@ -1195,7 +1195,8 @@ color:#FFF;
 }
 .comment-main span.zan::before{
 	content: " ";
-	float: right;
+	position: absolute;
+	right: 10px;
 	background: url('/public/home/images/zan.png') no-repeat center;
 	width: 22px;
 	height: 22px;
