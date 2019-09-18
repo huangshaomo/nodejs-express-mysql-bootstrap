@@ -4,7 +4,8 @@ NodeJS-Express-Bootstrap-Mysql
 
 前台访问地址：http://huangshaomo.top
 
-后台访问地址：huangshaomo.top/admin
+后台访问地址：http://huangshaomo.top/admin
+
 
 1）前台功能分析
 
