@@ -2,7 +2,7 @@ NodeJS-Express-Bootstrap-Mysql
 =================================
 项目地址：https://github.com/huangshaomo/nodejs-express-mysql-bootstrap
 
-前台访问地址：huangshaomo.top
+前台访问地址：http://huangshaomo.top
 
 后台访问地址：huangshaomo.top/admin
 
