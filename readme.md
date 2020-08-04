@@ -10,8 +10,6 @@ Nodejs-Express-Bootstrap-ejs模板引擎-Mysql
 界面预览
 =================================     
     前台首页
-    
-![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/elm-01.png)
 ![Image text](https://github.com/huangshaomo/photo/blob/master/github_img1.jpg)
     分类页
 ![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_homelist.jpg)
