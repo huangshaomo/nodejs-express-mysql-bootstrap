@@ -1,6 +1,7 @@
 Nodejs-Express-Bootstrap-ejs模板引擎-Mysql
 =================================
-一个基于Nodejs-Express-Bootstrap-ejs模板引擎-Mysql 搭建的响应式全栈个人博客，前台实现了响应式布局、文章列表无限滚动、文章展详情，登录注册，表情包评论等。后台包括管理员和普通用户的CURD、文章的CURD，以及轮播图的CURD与轮播图位置排序，与一些系统设置
+一个基于Nodejs-Express-Bootstrap-ejs模板引擎-Mysql 搭建的响应式全栈个人博客，前台实现了响应式布局、文章列表无限滚动、文章展详情，登录注册，表情包评论等。后台包括管理员和普通用户的CURD、文章的CURD，以及轮播图的CURD与轮播图位置排序，与系统设置
+
 项目地ql址：https://github.com/huangshaomo/nodejs-express-mysql-bootstrap
 
 前台访问地址：http://huangshaomo.top
