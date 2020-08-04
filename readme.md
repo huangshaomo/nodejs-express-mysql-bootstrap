@@ -10,11 +10,13 @@ Nodejs-Express-Bootstrap-ejs模板引擎-Mysql
 界面预览
 =================================     
     前台首页
-![Image text](https://github.com/huangshaomo/photo/blob/master/github_img1.jpg)
+![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/blog-01.png)      
     分类页
-![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_homelist.jpg)
+![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/blog-02.png) 
     文章详情界面
-![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_news.jpg)   
+![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/blog-03.png) 
+    评论区
+![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/blog-04.png) 
     
     后台登录界面
 ![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-01.png)   
