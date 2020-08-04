@@ -48,14 +48,6 @@ Nodejs-Express-Bootstrap-ejs模板引擎-Mysql
 
 
 
-    文章页
-![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_admin_news.jpg)     
-    文章添加
-![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_admin_newsupload.jpg)    
-等等...
->>>>>>> 33795f49bd1108dd78699ea0c1d375df81696d24
-
-
 1）前台功能分析
 
     1）用户管理
