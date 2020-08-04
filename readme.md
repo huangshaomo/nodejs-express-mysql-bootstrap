@@ -12,40 +12,54 @@ Nodejs-Express-Bootstrap-ejs模板引擎-Mysql
     前台首页
 ![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/blog-01.png)
 
-    分类页
+ 分类页
 ![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/blog-02.png) 
 
-    文章详情界面
+ 文章详情界面
 ![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/blog-03.png) 
 
-    评论区
+ 评论区
 ![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/blog-04.png) 
-    
+
+---------------------------------------------------------------------
+
     后台登录界面
-![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-01.png)   
-    首页
+![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-01.png)  
+
+首页
 ![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-02.png)  
-    管理员管理
+
+管理员管理
 ![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-03.png)      
-    管理员添加
+
+管理员添加
 ![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-04.png) 
-    用户管理
+
+用户管理
 ![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-05.png)      
-    文章分类管理
+
+文章分类管理
 ![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-06.png)      
-    分类添加
+
+分类添加
 ![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-07.png) 
-    文章管理
+ 
+ 文章管理
 ![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-08.png)      
-    文章添加
+ 
+ 文章添加
 ![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-09.png) 
-    评论管理
+ 
+ 评论管理
 ![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-10.png)      
-    轮播图管理
+ 
+ 轮播图管理
 ![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-11.png) 
-    轮播图添加
+ 
+ 轮播图添加
 ![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-12.png)      
-    系统管理
+ 
+ 系统管理
 ![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-13.png) 
 等等...
 
