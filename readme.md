@@ -17,9 +17,35 @@ Nodejs-Express-Bootstrap-ejs模板引擎-Mysql
 ![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_news.jpg)   
     
     后台登录界面
-![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_adminlogin.jpg)   
+![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-01.png)   
     首页
-![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_admin.jpg)  
+![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-02.png)  
+    管理员管理
+![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-03.png)      
+    管理员添加
+![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-04.png) 
+    用户管理
+![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-05.png)      
+    文章分类管理
+![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-06.png)      
+    分类添加
+![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-07.png) 
+    文章管理
+![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-08.png)      
+    文章添加
+![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-09.png) 
+    评论管理
+![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-10.png)      
+    轮播图管理
+![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-11.png) 
+    轮播图添加
+![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-12.png)      
+    系统管理
+![Image text](https://raw.githubusercontent.com/huangshaomo/photo/master/admin-blog-13.png) 
+等等...
+
+
+
     文章页
 ![Image text](https://github.com/huangshaomo/photo/blob/master/github_img_admin_news.jpg)     
     文章添加
